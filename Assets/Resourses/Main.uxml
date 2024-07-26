@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resourses/main.uss?fileID=7433441132597879392&amp;guid=650e524d0495a1e48982b2cb80a88675&amp;type=3#main" />
+    <ui:VisualElement name="Root" class="background" style="flex-grow: 1; width: 100%; height: 100px;">
+        <ui:VisualElement name="Header" class="gray-panel" style="width: 100%; height: 10%;">
+            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Text" class="white-text" style="width: 100%; height: 100%; max-width: 100%; max-height: 100%; font-size: 100%; padding-left: 1px; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 2px; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Body" style="flex-grow: 1; width: 100%; height: 100%; align-items: center; padding-top: 5%; padding-right: 5%; padding-bottom: 5%; padding-left: 5%;">
+            <ui:VisualElement name="TestElement" class="gray-panel" style="flex-grow: 1; width: 100%; height: 30%; align-items: stretch; max-height: 30%; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgba(255, 255, 255, 0); border-right-color: rgba(255, 255, 255, 0); border-top-color: rgba(255, 255, 255, 0); border-bottom-color: rgba(255, 255, 255, 0); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; justify-content: center; flex-direction: row;">
+                <ui:VisualElement name="Image" style="flex-grow: 1; width: 35%; height: 100%; background-image: url(&apos;project://database/Assets/Images/capsule_616x353.jpg?fileID=2800000&amp;guid=0662f4bbd36de1443976b19644432698&amp;type=3#capsule_616x353&apos;); -unity-background-scale-mode: scale-and-crop; max-height: 100%; max-width: 35%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-left-radius: 20px; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 20px; -unity-slice-left: 0; -unity-slice-top: 0; -unity-slice-right: 0; -unity-slice-bottom: 0;" />
+                <ui:VisualElement name="Texts" style="flex-grow: 1;">
+                    <ui:VisualElement style="flex-grow: 1;">
+                        <ui:Label tabindex="-1" text="Dead by daylight" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="white-text" style="margin-top: 5%; width: 80%; height: 40%; margin-right: 0; margin-bottom: 3%; margin-left: 3%; font-size: 100%; align-items: flex-start; align-self: flex-start; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: middle-left; text-overflow: clip; white-space: normal;" />
+                        <ui:VisualElement name="VisualElement" style="flex-grow: 1; height: 40%; max-height: 60%; width: 100%; max-width: 100%; flex-direction: row; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; min-width: auto; min-height: auto;">
+                            <ui:VisualElement name="VisualElement" style="flex-grow: 1; width: 50%; min-width: 50%; min-height: auto; max-width: 50%; flex-direction: row;">
+                                <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Images/star.png?fileID=2800000&amp;guid=2b787c7322f21324cbb70fbae9a54433&amp;type=3#star&apos;); -unity-background-scale-mode: scale-to-fit; align-self: auto; align-items: flex-start; width: 50%;" />
+                                <ui:Label tabindex="-1" text="7.8" parse-escape-sequences="true" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 50%; color: rgb(147, 147, 147); font-size: 100%; align-self: center; align-items: center; justify-content: space-between;" />
+                            </ui:VisualElement>
+                            <ui:VisualElement style="flex-grow: 1; width: 50%; max-width: 50%;" />
+                        </ui:VisualElement>
+                        <ui:Button text="More" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 90%; height: 20%; max-height: 20%; max-width: 90%; min-width: 90px; min-height: 20px; align-items: center; align-self: center; background-color: rgb(219, 187, 7); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; font-size: 80%; -unity-font-style: bold; margin-top: 10px; margin-bottom: 10px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

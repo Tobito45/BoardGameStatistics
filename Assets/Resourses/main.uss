@@ -1,0 +1,16 @@
+.background {
+    background-color: rgb(34, 34, 34);
+}
+
+.gray-panel {
+    flex-grow: 1;
+    background-color: rgb(60, 60, 60);
+}
+
+.white-text {
+    color: rgb(255, 255, 255);
+    -unity-font: url('project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=81d2c9f6b6e444148b2162a081dd69af&type=3#NotInter-Regular');
+    -unity-font-style: normal;
+    -unity-text-align: middle-center;
+    font-size: 100%;
+}
