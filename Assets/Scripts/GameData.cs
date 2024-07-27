@@ -12,8 +12,6 @@ public class GameData
     private float mark;
     private int countGames;
     private string url;
-
-
     public GameData(int id, string name, float mark, int countGames, string url)
     {
         this.id = id;
@@ -56,9 +54,4 @@ public class GameData
                 return DownloadHandlerTexture.GetContent(www);
         }
     }
-
-    /*WWW www = new WWW(url);
-    yield return www;
-    image.style.backgroundImage = new StyleBackground(www.texture);
-    */
 }
