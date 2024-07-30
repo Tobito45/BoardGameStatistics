@@ -3,23 +3,22 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;
 
-public class MainController : MonoBehaviour
+public class UIController
 {
-    [SerializeField]
-    private UIDocument _main, _game;
-    private VisualElement _mainRoot, _gameRoot;
+    private readonly GameDataFactory _gameDataFactory;
+    private readonly VisualElement _mainRoot, _gameRoot;
+    private readonly GameDataController _gameDataController;
 
-    private GameDataFactory gameDataFactory;
     private ScrollView _listView;
     private VisualTreeAsset _prefabElement;
 
-    [Inject]
-    public void Construct(GameDataFactory gameDataFactory)
+    public UIController(GameDataFactory gameDataFactory, UIDocument main, UIDocument game, GameDataController gameDataController)
     {
-        this.gameDataFactory = gameDataFactory;
+        _gameDataFactory = gameDataFactory;
+        _gameDataController = gameDataController;
         _prefabElement = Resources.Load<VisualTreeAsset>("ElementListView");
-        _mainRoot = _main.rootVisualElement;
-        _gameRoot = _game.rootVisualElement;
+        _mainRoot = main.rootVisualElement;
+        _gameRoot = game.rootVisualElement;
 
         InstallizationMain();
         InstallizationGame();
@@ -31,11 +30,11 @@ public class MainController : MonoBehaviour
 
         _listView = _mainRoot.Q<ScrollView>("List");
 
-        foreach (GameData data in gameDataFactory.GetData())
+        foreach (GameData data in _gameDataFactory.GetData())
         {
             VisualElement itemUi = _prefabElement.Instantiate();
             _listView.Add(itemUi);
-            data.InstallizationMain(itemUi, this);
+            _gameDataController.InstallizationMain(itemUi, data, this);
         }
     }
 
@@ -54,7 +53,7 @@ public class MainController : MonoBehaviour
         {
             _mainRoot.style.display = DisplayStyle.None;
             _gameRoot.style.display = DisplayStyle.Flex;
-            gameData.InstallizationGame(_gameRoot);
+            _gameDataController.InstallizationGame(_gameRoot);
         }
     }
 }
