@@ -15,7 +15,7 @@
                         <ui:Label tabindex="-1" text="20" parse-escape-sequences="true" display-tooltip-when-elided="true" name="GamesText" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 50%; color: rgb(147, 147, 147); font-size: 100%; align-self: center; align-items: center; justify-content: space-between; max-width: 50%; min-width: 50%; -unity-text-align: middle-left; height: 100%; max-height: 100%; min-height: 100%;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:Button text="More" parse-escape-sequences="true" display-tooltip-when-elided="true" class="yellow-button" style="font-size: 80%; transition-duration: 0.2s;" />
+                <ui:Button text="More" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MoreButton" class="yellow-button" style="font-size: 80%; transition-duration: 0.2s;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

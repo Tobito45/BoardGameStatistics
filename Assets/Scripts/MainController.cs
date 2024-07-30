@@ -1,31 +1,60 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Zenject;
 
-public class MainController 
+public class MainController : MonoBehaviour
 {
-    private readonly GameDataFactory gameDataFactory;
-    private readonly VisualElement _root;
+    [SerializeField]
+    private UIDocument _main, _game;
+    private VisualElement _mainRoot, _gameRoot;
+
+    private GameDataFactory gameDataFactory;
     private ScrollView _listView;
     private VisualTreeAsset _prefabElement;
 
-    public MainController(GameDataFactory gameDataFactory, VisualElement root)
+    [Inject]
+    public void Construct(GameDataFactory gameDataFactory)
     {
         this.gameDataFactory = gameDataFactory;
         _prefabElement = Resources.Load<VisualTreeAsset>("ElementListView");
-        _root = root;
-        Installization();
+        _mainRoot = _main.rootVisualElement;
+        _gameRoot = _game.rootVisualElement;
+
+        InstallizationMain();
+        InstallizationGame();
+        ActiveMenu(null);
     }
 
-    private void Installization()
+    private void InstallizationMain()
     {
-        _listView = _root.Q<ScrollView>("List");
+
+        _listView = _mainRoot.Q<ScrollView>("List");
 
         foreach (GameData data in gameDataFactory.GetData())
         {
             VisualElement itemUi = _prefabElement.Instantiate();
             _listView.Add(itemUi);
-            data.Installization(itemUi);
+            data.InstallizationMain(itemUi, this);
+        }
+    }
+
+    private void InstallizationGame()
+    {
+        _gameRoot.Q<Button>("BackButton").clickable.clicked += () => ActiveMenu(null);
+    }
+
+    public void ActiveMenu(GameData gameData)
+    {
+        if(gameData == null)
+        {
+            _mainRoot.style.display = DisplayStyle.Flex;
+            _gameRoot.style.display = DisplayStyle.None;
+        } else
+        {
+            _mainRoot.style.display = DisplayStyle.None;
+            _gameRoot.style.display = DisplayStyle.Flex;
+            gameData.InstallizationGame(_gameRoot);
         }
     }
 }
