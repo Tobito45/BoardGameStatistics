@@ -13,14 +13,16 @@ public class GameData
     public int Games { get; private set; }
     public int Players { get; private set; } 
     public string Url { get; private set; }
-    public GameData(int id, string name, float mark, int countGames, string url, int countMinutes, int countPlayers)
+    public string Description { get; private set; }
+    public GameData(int id, string name, float mark, int countGames, string url, int countMinutes, int countPlayers, string description)
     {
-        Name = name;
-        this.mark = mark;
-        Games = countGames;
-        this.Url = url;
         this.countMinutes = countMinutes;
-        this.Players = countPlayers;
+        this.mark = mark;
+        Name = name;
+        Games = countGames;
+        Url = url;
+        Players = countPlayers;
+        Description = description;
     }
 
     public float Mark => mark / Players;

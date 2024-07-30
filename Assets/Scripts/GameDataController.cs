@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UIElements;
@@ -32,6 +33,7 @@ public class GameDataController
         root.Q<Label>("Players").text = actualData.Players.ToString();
         root.Q<Label>("CountGames").text = actualData.Games.ToString();
         root.Q<Label>("GameMark").text = actualData.Mark.ToString("F1");
+        root.Q<Label>("Description").text = actualData.Description;
         LoadImageAsync(root.Q<VisualElement>("Image"), actualData.Url);
     }
 
