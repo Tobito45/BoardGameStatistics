@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/main.uss?fileID=7433441132597879392&amp;guid=650e524d0495a1e48982b2cb80a88675&amp;type=3#main" />
+    <ui:VisualElement name="Root" class="background" style="flex-grow: 1; width: 100%; height: 100px; align-items: flex-start;">
+        <ui:VisualElement name="Header" class="gray-panel" style="width: 100%; height: 10%; flex-direction: row;">
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="black-button" style="width: 20%; height: 60%;" />
+            <ui:Label tabindex="-1" text="Dead by daylight" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Name" class="white-text" style="width: 80%; height: 100%; max-width: 100%; max-height: 100%; font-size: 100%; padding-left: 1px; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 2px; margin-right: 0; margin-top: 0; margin-bottom: 0; align-self: center;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Body" style="flex-grow: 1; width: 100%; height: 100%; align-items: flex-start; padding-top: 2%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%;">
+            <ui:Button text="Reviews" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ButtonActons" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 8%; max-height: 8%; min-height: 8%; margin-top: 3%; font-size: 80%;" />
+            <ui:Button text="Games" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ButtonActons" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 8%; max-height: 8%; min-height: 8%; margin-top: 3%; font-size: 80%;" />
+            <ui:Button text="Characters" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ButtonActons" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 8%; max-height: 8%; min-height: 8%; margin-top: 3%; font-size: 80%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
