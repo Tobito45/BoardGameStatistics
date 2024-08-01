@@ -8,21 +8,20 @@ public class SceneInstaller : MonoInstaller
     [SerializeField]
     private UIDocument _main, _game, _actions, _reviews;
 
-    [SerializeField]
-    private UIController _controller;
     public override void InstallBindings()
     {
+        Container.Bind<GameDataFactory>().AsSingle();
+        Container.Bind<UIController>().AsSingle().NonLazy();
         InstallStateMachine();
 
-        Container.Bind<GameDataFactory>().AsSingle();
     }
 
     private void InstallStateMachine()
     {
-        Container.Bind<MainState>().AsSingle().WithArguments(_main.rootVisualElement, _controller);
-        Container.Bind<GameState>().AsSingle().WithArguments(_game.rootVisualElement, _controller);
-        Container.Bind<ActionsState>().AsSingle().WithArguments(_actions.rootVisualElement, _controller);
-        Container.Bind<ReviewsState>().AsSingle().WithArguments(_reviews.rootVisualElement, _controller);
+        Container.Bind<MainState>().AsSingle().WithArguments(_main.rootVisualElement);
+        Container.Bind<GameState>().AsSingle().WithArguments(_game.rootVisualElement);
+        Container.Bind<ActionsState>().AsSingle().WithArguments(_actions.rootVisualElement);
+        Container.Bind<ReviewsState>().AsSingle().WithArguments(_reviews.rootVisualElement);
         Container.Bind<StateMachine>().AsSingle().NonLazy();
     }
 }

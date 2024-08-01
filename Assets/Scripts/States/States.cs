@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.Progress;
 
 namespace States {
     public interface IState
@@ -13,85 +9,54 @@ namespace States {
     }
 
     public abstract class BaseState : IState 
-    { 
+    {
+        private readonly UIController _uIController;
+
         public VisualElement VisualElement { get; private set; }
-        public BaseState(VisualElement visualElement)
+        public BaseState(VisualElement visualElement, UIController uIController)
         {
             VisualElement = visualElement;
-            Debug.Log(visualElement.name);
+            _uIController = uIController;
+            _uIController.GetController(this).Installization(VisualElement);
             visualElement.style.display = DisplayStyle.None;
         }
-        public virtual void Entry() => VisualElement.style.display = DisplayStyle.Flex;
-        public virtual void Exit() => VisualElement.style.display = DisplayStyle.None;
-
+        public virtual void Entry()
+        {
+            VisualElement.style.display = DisplayStyle.Flex;
+            _uIController.GetController(this).Update(VisualElement);
+        }
+        public virtual void Exit()
+        {
+            VisualElement.style.display = DisplayStyle.None;
+            _uIController.GetController(this).Clear(VisualElement);
+        }
     }
 
     public class MainState : BaseState, IState
     {
-        public MainState(VisualElement visualElement, GameDataFactory gameDataFactory, UIController uiController) : base(visualElement)
+        public MainState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
         {
-            uiController.InstallizationMain(visualElement, gameDataFactory.GetData());
         }
-
     }
 
     public class GameState : BaseState, IState
     {
-        private readonly VisualElement _visualElement;
-        private readonly UIController _uiController;
-
-        public GameState(VisualElement visualElement, UIController uiController) : base(visualElement) 
+        public GameState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
         {
-            _visualElement = visualElement;
-            _uiController = uiController;
-            _uiController.InstallizationGame(visualElement);
         }
-
-        public override void Entry()
-        {
-            _uiController.UpdateGame(_visualElement);
-            base.Entry();
-        }
-
     }
     public class ActionsState : BaseState, IState
     {
-        private readonly VisualElement _visualElement;
-        private readonly UIController _uiController;
-
-        public ActionsState(VisualElement visualElement, UIController uiController) : base(visualElement) 
+        public ActionsState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
         {
-            _visualElement = visualElement;
-            _uiController = uiController;
-            _uiController.InstallizationActions(_visualElement);
         }
-
-        public override void Entry()
-        {
-            _uiController.UpdateActions(_visualElement);
-            base.Entry();
-        }
-
     }
 
     public class ReviewsState : BaseState, IState
     {
-        private readonly VisualElement _visualElement;
-        private readonly UIController _uiController;
-
-        public ReviewsState(VisualElement visualElement, UIController uiController) : base(visualElement)
+        public ReviewsState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
         {
-            _visualElement = visualElement;
-            _uiController = uiController;
-            _uiController.InstallizationReviews(visualElement);
         }
-
-        public override void Entry()
-        {
-            _uiController.UpdateReviews(_visualElement);
-            base.Entry();
-        }
-
     }
 }
 

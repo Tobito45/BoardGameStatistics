@@ -3,110 +3,46 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UIStateControllers;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UIElements;
 using Zenject;
 
-public class UIController : MonoBehaviour
+public class UIController 
 {
+    private GameDataFactory _gameDataFactory;
     private GameData _actualData;
-    private StateMachine _stateMachine;
+    public StateMachine StateMachine { get; private set; }
 
-    VisualTreeAsset prefabReviewElement;
-    VisualTreeAsset prefabMainElement;
-
-    private void Awake()
-    {
-        prefabReviewElement = Resources.Load<VisualTreeAsset>("ReviewElement");
-        prefabMainElement = Resources.Load<VisualTreeAsset>("MainElement");
-    }
+    private Dictionary<Type, IUIState> _statesControllers;
 
     [Inject]
     public void Construct(StateMachine stateMachine)
     {
-        _stateMachine = stateMachine;
+        StateMachine = stateMachine;
+    }
 
+    public  UIController(GameDataFactory gameDataFactory)
+    {
+        _gameDataFactory = gameDataFactory;
+
+        _statesControllers = new Dictionary<Type, IUIState>()
+        {
+            {typeof(MainState), new MainUIStateController(this, _gameDataFactory) },
+            {typeof(GameState), new GameUIStateController(this) },
+            {typeof(ActionsState), new ActionsUIStateController(this) },
+            {typeof(ReviewsState), new ReviewsUIStateController(this) },
+        };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;
+    public GameData GetActualData => _actualData;
 
-    public void InstallizationMain(VisualElement root, IEnumerable<GameData> allData)
+    public IUIState GetController(BaseState state)
     {
-        ScrollView listView = root.Q<ScrollView>("List");
-        foreach (GameData data in allData)
-        {
-            if (prefabMainElement == null)
-                Awake();
-
-            VisualElement itemUi = prefabMainElement.Instantiate();
-            listView.Add(itemUi);
-            itemUi.Q<Label>("Name").text = data.Name;
-            itemUi.Q<Label>("MarkText").text = data.Mark.ToString("F1");
-            itemUi.Q<Label>("GamesText").text = data.Games.ToString();
-            itemUi.Q<Button>("MoreButton").clicked += () =>
-            {
-                SetActualData(data);
-                _stateMachine.SetGameState();
-            };
-            LoadImageAsync(itemUi.Q<VisualElement>("Image"), data.Url);
-        }
-
-        
-    }
-
-    public void InstallizationGame(VisualElement root)
-    {
-        root.Q<Button>("BackButton").clicked += () => _stateMachine.SetMainState();
-        root.Q<Button>("ButtonActions").clicked += () => _stateMachine.SetActionsState();
-    }
-
-    public void UpdateGame(VisualElement root)
-    {
-        root.Q<Label>("Name").text = _actualData.Name;
-        root.Q<Label>("GameLength").text = _actualData.Games.ToString("F1") + " min";
-        root.Q<Label>("Players").text = _actualData.Players.ToString();
-        root.Q<Label>("CountGames").text = _actualData.Games.ToString();
-        root.Q<Label>("GameMark").text = _actualData.Mark.ToString("F1");
-        root.Q<Label>("Description").text = _actualData.Description;
-        LoadImageAsync(root.Q<VisualElement>("Image"), _actualData.Url);
-    }
-
-    public void InstallizationActions(VisualElement root)
-    {
-        root.Q<Button>("BackButton").clicked += () => _stateMachine.SetGameState();
-        root.Q<Button>("ButtonReview").clicked += () => _stateMachine.SetReviewsState();
-    }
-
-    public void UpdateActions(VisualElement root)
-    {
-        root.Q<Label>("Name").text = _actualData.Name;
-    }
-
-    public void InstallizationReviews(VisualElement root)
-    {
-        root.Q<Button>("BackButton").clicked += () => _stateMachine.SetActionsState();
-    }
-
-    public void UpdateReviews(VisualElement root)
-    {
-        if (root.Q<Label>("Name").text != _actualData.Name || _actualData.GetReviews.Count() != root.Q<ScrollView>("List").childCount)
-        {
-            root.Q<ScrollView>("List").Clear();
-
-            root.Q<Label>("Name").text = _actualData.Name;
-            ScrollView listView = root.Q<ScrollView>("List");
-            foreach (Review review in _actualData.GetReviews)
-            {
-                VisualElement itemUi = prefabReviewElement.Instantiate();
-                itemUi.Q<Label>("Name").text = review.Name;
-                itemUi.Q<Label>("Text").text = review.Text;
-                itemUi.Q<Label>("Mark").text = review.Mark.ToString("F1");
-                listView.Add(itemUi);
-            }
-        }
-    }
-
-    private async void LoadImageAsync(VisualElement image, string url)
+        return _statesControllers[state.GetType()];
+    } 
+    public async void LoadImageAsync(VisualElement image, string url)
     {
         Texture2D texture = await GetTextureFromUrlAsync(url);
         if (texture != null)
