@@ -107,3 +107,7 @@
     max-height: 50%;
     min-height: 50%;
 }
+
+.gray-text {
+    color: rgb(147, 147, 147);
+}

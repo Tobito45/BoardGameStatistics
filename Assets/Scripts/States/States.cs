@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
 namespace States {
     public interface IState
@@ -16,6 +18,7 @@ namespace States {
         public BaseState(VisualElement visualElement)
         {
             VisualElement = visualElement;
+            Debug.Log(visualElement.name);
             visualElement.style.display = DisplayStyle.None;
         }
         public virtual void Entry() => VisualElement.style.display = DisplayStyle.Flex;
@@ -25,76 +28,70 @@ namespace States {
 
     public class MainState : BaseState, IState
     {
-        public MainState(VisualElement visualElement, GameDataFactory gameDataFactory, UIController gameDataController) : base(visualElement) 
+        public MainState(VisualElement visualElement, GameDataFactory gameDataFactory, UIController uiController) : base(visualElement)
         {
-            VisualTreeAsset prefabElement = Resources.Load<VisualTreeAsset>("ElementListView");
-
-            ScrollView listView = visualElement.Q<ScrollView>("List");
-
-            foreach (GameData item in gameDataFactory.GetData())
-            {
-                VisualElement itemUi = prefabElement.Instantiate();
-                listView.Add(itemUi);
-                gameDataController.InstallizationMain(itemUi, item);
-            }
+            uiController.InstallizationMain(visualElement, gameDataFactory.GetData());
         }
 
-        public override void Entry()
-        {
-            base.Entry();
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-        }
     }
 
     public class GameState : BaseState, IState
     {
-        private readonly VisualElement visualElement;
-        private readonly UIController gameDataController;
+        private readonly VisualElement _visualElement;
+        private readonly UIController _uiController;
 
-        public GameState(VisualElement visualElement, UIController gameDataController) : base(visualElement) 
+        public GameState(VisualElement visualElement, UIController uiController) : base(visualElement) 
         {
-            this.visualElement = visualElement;
-            this.gameDataController = gameDataController;
+            _visualElement = visualElement;
+            _uiController = uiController;
+            _uiController.InstallizationGame(visualElement);
         }
 
         public override void Entry()
         {
-            gameDataController.InstallizationGame(visualElement);
+            _uiController.UpdateGame(_visualElement);
             base.Entry();
         }
 
-        public override void Exit()
-        {
-            gameDataController.ClearGame(visualElement);
-            base.Exit();
-        }
     }
     public class ActionsState : BaseState, IState
     {
-        private readonly VisualElement visualElement;
-        private readonly UIController gameDataController;
+        private readonly VisualElement _visualElement;
+        private readonly UIController _uiController;
 
-        public ActionsState(VisualElement visualElement, UIController gameDataController) : base(visualElement) 
+        public ActionsState(VisualElement visualElement, UIController uiController) : base(visualElement) 
         {
-            this.visualElement = visualElement;
-            this.gameDataController = gameDataController;
+            _visualElement = visualElement;
+            _uiController = uiController;
+            _uiController.InstallizationActions(_visualElement);
         }
 
         public override void Entry()
         {
-            gameDataController.InstallizationActions(visualElement);
+            _uiController.UpdateActions(_visualElement);
             base.Entry();
         }
 
-        public override void Exit()
+    }
+
+    public class ReviewsState : BaseState, IState
+    {
+        private readonly VisualElement _visualElement;
+        private readonly UIController _uiController;
+
+        public ReviewsState(VisualElement visualElement, UIController uiController) : base(visualElement)
         {
-            gameDataController.ClearActions(visualElement);
-            base.Exit();
+            _visualElement = visualElement;
+            _uiController = uiController;
+            _uiController.InstallizationReviews(visualElement);
         }
+
+        public override void Entry()
+        {
+            _uiController.UpdateReviews(_visualElement);
+            base.Entry();
+        }
+
     }
 }
 

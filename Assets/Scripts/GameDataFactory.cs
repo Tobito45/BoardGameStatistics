@@ -17,6 +17,16 @@ public class GameDataFactory
         data.Add(new GameData(4, "Unmatched", 60f, 22, "https://im9.cz/sk/iR/importprodukt-orig/169/16991d4953b9d1871074915cb3fca125.jpg",
             300, 5, "Unmatched is a highly asymmetrical miniature fighting game for two or four players. Each hero is represented by a unique deck designed to evoke their style and legend. Tactical movement and no-luck combat resolution create a unique play experience that rewards expertise, but just when you've mastered one set, new heroes arrive to provide all new match-ups."
             ));
+
+        CreatingReviews();
+    }
+
+    private void CreatingReviews()
+    {
+        data[0].AddReview(new Review("Dmitro", 7.8f, "Bla bla hui sosi"),
+                           new Review("Dmitro2", 7.8f, "Bla bla hui sosi"),
+                           new Review("Dushnila", 10f, "Can't recommend this game enough.\r\n\r\nVery good at 2,3 and 5. Components are very well designed. With 3k+ hours on the video game, I can tell that multiple aspects of the game are VERY WELL implemented into the game.\r\n\r\nIt's hard to win as killer until the player in that role has a lot of experience.\r\n\r\nI recommend a SMALL house rule until then, if the players are able to power the door on the last round, you still play the killer's turn. If the killer reaches his wincon before the end of the game, he wins instead of the survivors. It will help smooth out the stats (because even with that small rule, we still had about only a 30% winrate on killer)."));
+        data[1].AddReview(new Review("Ja ja", 2.3f, "Lublu etu ihru"));
     }
 
     public IEnumerable<GameData> GetData() => data;
