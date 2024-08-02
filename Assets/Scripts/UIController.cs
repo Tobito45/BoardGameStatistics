@@ -33,6 +33,7 @@ public class UIController
             {typeof(GameState), new GameUIStateController(this) },
             {typeof(ActionsState), new ActionsUIStateController(this) },
             {typeof(ReviewsState), new ReviewsUIStateController(this) },
+            {typeof(ReviewInputState), new ReviewsInputUIStateController(this) },
         };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;

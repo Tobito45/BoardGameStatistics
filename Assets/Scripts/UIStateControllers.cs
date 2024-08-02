@@ -79,9 +79,9 @@ namespace UIStateControllers
         public override void Update(VisualElement visualElement)
         {
             visualElement.Q<Label>("Name").text = ActualData.Name;
-            visualElement.Q<Label>("GameLength").text = ActualData.Games.ToString("F1") + " min";
+            visualElement.Q<Label>("GameLength").text = ActualData.Time.ToString("F1") + " min";
             visualElement.Q<Label>("Players").text = ActualData.Players.ToString();
-            visualElement.Q<Label>("CountGames").text = ActualData.ToString();
+            visualElement.Q<Label>("CountGames").text = ActualData.Games.ToString();
             visualElement.Q<Label>("GameMark").text = ActualData.Mark.ToString("F1");
             visualElement.Q<Label>("Description").text = ActualData.Description;
             _uIController.LoadImageAsync(visualElement.Q<VisualElement>("Image"), ActualData.Url);
@@ -103,7 +103,7 @@ namespace UIStateControllers
     }
     public class ReviewsUIStateController : UIStateControllerBase
     {
-        VisualTreeAsset prefabReviewElement;
+        VisualTreeAsset prefabReviewElement, prefabPlusElement;
 
         public ReviewsUIStateController(UIController uIController) : base(uIController) { }
 
@@ -111,13 +111,14 @@ namespace UIStateControllers
         {
             visualElement.Q<Button>("BackButton").clicked += () => StateMachine.SetActionsState();
             prefabReviewElement = Resources.Load<VisualTreeAsset>("ReviewElement");
+            prefabPlusElement = Resources.Load<VisualTreeAsset>("PlusElement");
         }
         public override void Clear(VisualElement visualElement) { }
 
         public override void Update(VisualElement visualElement)
         {
             if (visualElement.Q<Label>("Name").text != ActualData.Name 
-                || ActualData.GetReviews.Count() != visualElement.Q<ScrollView>("List").childCount)
+                || ActualData.GetReviews.Count() != visualElement.Q<ScrollView>("List").childCount + 1)
             {
                 visualElement.Q<ScrollView>("List").Clear();
 
@@ -131,7 +132,81 @@ namespace UIStateControllers
                     itemUi.Q<Label>("Mark").text = review.Mark.ToString("F1");
                     listView.Add(itemUi);
                 }
+                VisualElement plus = prefabPlusElement.Instantiate();
+                listView.Add(plus);
+                plus.Q<Button>("Add").clicked += () => StateMachine.SetReviewsInputState();
             }
+        }
+    }
+
+    public class ReviewsInputUIStateController : UIStateControllerBase
+    {
+        public ReviewsInputUIStateController(UIController uIController) : base(uIController) { }
+
+        public override void Installization(VisualElement visualElement)
+        {
+            visualElement.Q<Button>("BackButton").clicked += () => StateMachine.SetReviewsState();
+            visualElement.Q<Button>("AddButton").clicked += () => SaveNewReview(visualElement);
+
+            FloatField markInput = visualElement.Q<FloatField>("MarkInput");
+            visualElement.RegisterCallback<ChangeEvent<float>>(evt => ValidateFloatMark(markInput));
+
+        }
+        public override void Clear(VisualElement visualElement) { }
+
+        public override void Update(VisualElement visualElement)
+        {
+            TextField textFieldName = visualElement.Q<TextField>("NameInput");
+            TextField textFieldText = visualElement.Q<TextField>("TextInput");
+            textFieldName.value = string.Empty;
+            textFieldText.value = string.Empty;
+            SetInputFieldColor(textFieldText, Color.white,0);
+            SetInputFieldColor(textFieldName, Color.white,0);
+            visualElement.Q<FloatField>("MarkInput").value = 0.0f;
+        }
+
+        private void ValidateFloatMark(FloatField floatField)
+        {
+            if (floatField.value > 10)
+                floatField.value = 10;
+            if (floatField.value < 0)
+                floatField.value = 0;
+        }
+
+        private bool Validate(string name, string text)
+        {
+            return name != string.Empty  && text != string.Empty;
+        }
+
+        private void SaveNewReview(VisualElement visualElement)
+        {
+            TextField textFieldName = visualElement.Q<TextField>("NameInput");
+            TextField textFieldText = visualElement.Q<TextField>("TextInput");
+            string name = textFieldName.value;
+            string text = textFieldText.value;
+            float mark = visualElement.Q<FloatField>("MarkInput").value;
+
+            if (!Validate(name, text))
+            {
+                SetInputFieldColor(textFieldText, Color.red,2);
+                SetInputFieldColor(textFieldName, Color.red,2);
+                return;
+            }
+            _uIController.GetActualData.AddReview(new Review(name, mark, text));
+            StateMachine.SetReviewsState();
+        }
+
+        private void SetInputFieldColor(TextField textField, Color color, int boardSize)
+        {
+            textField.style.borderBottomColor = color;
+            textField.style.borderTopColor = color;
+            textField.style.borderLeftColor = color;
+            textField.style.borderRightColor = color;
+
+            textField.style.borderBottomWidth = boardSize;
+            textField.style.borderTopWidth = boardSize;
+            textField.style.borderLeftWidth = boardSize;
+            textField.style.borderRightWidth = boardSize;
         }
     }
 }

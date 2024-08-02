@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/main.uss?fileID=7433441132597879392&amp;guid=650e524d0495a1e48982b2cb80a88675&amp;type=3#main" />
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.82); justify-content: center;">
+        <ui:VisualElement name="VisualElement" class="gray-panel" style="flex-grow: 1; width: 80%; align-items: stretch; align-self: center; height: 60%; max-height: 60%; justify-content: flex-start;">
+            <ui:Label tabindex="-1" text="New review" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="font-size: 100%; -unity-text-align: upper-center; height: 10%; max-height: 10%; min-height: 10%;" />
+            <ui:VisualElement style="flex-grow: 1; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(125, 125, 125); border-right-color: rgb(125, 125, 125); border-top-color: rgb(125, 125, 125); border-bottom-color: rgb(125, 125, 125); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; height: auto;">
+                <ui:VisualElement style="flex-grow: 1; height: 15%; max-height: 15%; min-height: 15%;">
+                    <ui:Label tabindex="-1" text="Name:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; padding-left: 10px; font-size: 50%;" />
+                    <ui:TextField picking-mode="Ignore" name="NameInput" value="Dmitro..." class="text-field" style="font-size: 70%;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; height: 15%; max-height: 15%; min-height: 15%;">
+                    <ui:Label tabindex="-1" text="Mark:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; padding-left: 10px; font-size: 50%;" />
+                    <ui:FloatField value="0" is-delayed="true" name="MarkInput" class="text-field" style="font-size: 70%;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; height: 35%; max-height: 35%; min-height: 35%;">
+                    <ui:Label tabindex="-1" text="Text:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; padding-left: 10px; font-size: 50%;" />
+                    <ui:TextField picking-mode="Ignore" value="This game is..." multiline="true" name="TextInput" class="text-field" style="height: 70%; max-height: 70%; min-height: 70%; font-size: 70%; margin-left: 10px; margin-right: 10px;" />
+                </ui:VisualElement>
+                <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddButton" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 10%; max-height: 10%; min-height: 10%; margin-top: 50px; font-size: 80%; margin-bottom: 20px;" />
+                <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 10%; max-height: 10%; min-height: 10%; margin-top: 50px; font-size: 80%; justify-content: flex-start;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -14,12 +14,14 @@ namespace States
         private GameState _gameState;
         private ActionsState _actionsState;
         private ReviewsState _reviewsState;
-        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState)
+        private ReviewInputState _reviewsInputState;
+        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState)
         {
             _mainState = mainState;
             _gameState = gameState;
             _actionsState = actionsState;
             _reviewsState = reviewsState;
+            _reviewsInputState = reviewsInputState;
 
             Intialize(_mainState);
         }
@@ -41,5 +43,6 @@ namespace States
         public void SetGameState() => TransitionTo(_gameState);
         public void SetActionsState() => TransitionTo(_actionsState);
         public void SetReviewsState() => TransitionTo(_reviewsState);
+        public void SetReviewsInputState() => TransitionTo(_reviewsInputState);
     }
 }

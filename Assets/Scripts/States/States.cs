@@ -58,5 +58,20 @@ namespace States {
         {
         }
     }
+    public class ReviewInputState : BaseState, IState
+    {
+        private readonly ReviewsState reviewState;
+
+        public ReviewInputState(VisualElement visualElement, ReviewsState reviewState, UIController uIController) : base(visualElement, uIController)
+        {
+            this.reviewState = reviewState;
+        }
+
+        public override void Entry()
+        {
+            reviewState.VisualElement.style.display = DisplayStyle.Flex;
+            base.Entry();
+        }
+    }
 }
 

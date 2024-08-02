@@ -7,8 +7,6 @@ public class GameDataFactory
 
     public GameDataFactory()
     {
-        Debug.Log("DA SUKA");
-
         data.Add(new GameData(0, "Dead by daylight", 120.2f, 10, "https://cf.geekdo-images.com/fpnjJSQWpAh1WZW3zJ807A__itemrep/img/0FyP7gUgtFxQS8vq2p_VocShE84=/fit-in/246x300/filters:strip_icc()/pic6727475.jpg",
             600, 10,
             "Death is not an escape. The hit asymmetric survival horror game comes to tabletop! Take on the role of a ruthless Killer or a resourceful Survivor as you navigate sinister trials.   As a Survivor, plot your moves, coordinate with your allies, and repair generators to power the exit and escape. "
