@@ -1,3 +1,4 @@
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -60,16 +61,36 @@ namespace States {
     }
     public class ReviewInputState : BaseState, IState
     {
-        private readonly ReviewsState reviewState;
+        private readonly ReviewsState _reviewState;
 
         public ReviewInputState(VisualElement visualElement, ReviewsState reviewState, UIController uIController) : base(visualElement, uIController)
         {
-            this.reviewState = reviewState;
+            _reviewState = reviewState;
         }
 
         public override void Entry()
         {
-            reviewState.VisualElement.style.display = DisplayStyle.Flex;
+            _reviewState.VisualElement.style.display = DisplayStyle.Flex;
+            base.Entry();
+        }
+    }
+    public class GamesInfoState : BaseState, IState
+    {
+        public GamesInfoState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
+        {
+        }
+    }
+    public class GamesInfoInputState : BaseState, IState
+    {
+        private readonly GamesInfoState _gamesInfoState;
+
+        public GamesInfoInputState(VisualElement visualElement, GamesInfoState gamesInfoState, UIController uIController) : base(visualElement, uIController)
+        {
+            _gamesInfoState = gamesInfoState;
+        }
+        public override void Entry()
+        {
+            _gamesInfoState.VisualElement.style.display = DisplayStyle.Flex;
             base.Entry();
         }
     }

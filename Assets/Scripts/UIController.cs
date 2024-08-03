@@ -34,6 +34,8 @@ public class UIController
             {typeof(ActionsState), new ActionsUIStateController(this) },
             {typeof(ReviewsState), new ReviewsUIStateController(this) },
             {typeof(ReviewInputState), new ReviewsInputUIStateController(this) },
+            {typeof(GamesInfoState), new GamesInfoUIStateController(this) },
+            {typeof(GamesInfoInputState), new GamesInfoInputUIStateController(this) },
         };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;
@@ -67,5 +69,18 @@ public class UIController
             else
                 return DownloadHandlerTexture.GetContent(www);
         }
+    }
+
+    public void SetInputFieldColor(VisualElement textField, Color color, int boardSize)
+    {
+        textField.style.borderBottomColor = color;
+        textField.style.borderTopColor = color;
+        textField.style.borderLeftColor = color;
+        textField.style.borderRightColor = color;
+
+        textField.style.borderBottomWidth = boardSize;
+        textField.style.borderTopWidth = boardSize;
+        textField.style.borderLeftWidth = boardSize;
+        textField.style.borderRightWidth = boardSize;
     }
 }

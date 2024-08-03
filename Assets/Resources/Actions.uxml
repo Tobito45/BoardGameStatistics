@@ -7,7 +7,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="Body" style="flex-grow: 1; width: 100%; height: 100%; align-items: flex-start; padding-top: 2%; padding-right: 3%; padding-bottom: 3%; padding-left: 3%;">
             <ui:Button text="Reviews" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ButtonReview" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 8%; max-height: 8%; min-height: 8%; margin-top: 3%; font-size: 80%;" />
-            <ui:Button text="Games" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ButtonActons" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 8%; max-height: 8%; min-height: 8%; margin-top: 3%; font-size: 80%;" />
+            <ui:Button text="Games" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ButtonGame" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 8%; max-height: 8%; min-height: 8%; margin-top: 3%; font-size: 80%;" />
             <ui:Button text="Characters" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ButtonActons" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 8%; max-height: 8%; min-height: 8%; margin-top: 3%; font-size: 80%;" />
         </ui:VisualElement>
     </ui:VisualElement>

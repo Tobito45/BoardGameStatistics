@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,30 +9,32 @@ using UnityEngine.UIElements;
 
 public class GameData
 {
-    private float mark;
-    private int countMinutes;
-    private List<Review> reviews = new List<Review>();
+    private List<Review> _reviews = new List<Review>();
+    private List<Game> _games = new List<Game> ();
     public string Name { get; private set; }
-    public int Games { get; private set; }
-    public int Players { get; private set; } 
     public string Url { get; private set; }
     public string Description { get; private set; }
-    public GameData(int id, string name, float mark, int countGames, string url, int countMinutes, int countPlayers, string description)
+    public float Players => _games.Count == -1 ? 0 : (float)_games.Sum(n => n.Players) / _games.Count;
+
+    public int Games => _games.Count;
+    private float SumMarkReview => _reviews.Count == 0 ? -1 : _reviews.Sum(n => n.Mark);
+    private int PlayersReview => _reviews.Count == 0 ? 1 : _reviews.Count;
+    private int CountMinutes => _games.Count == 0 ? 0 : _games.Sum(n => n.Time);
+
+    public GameData(int id, string name, string url, string description)
     {
-        this.countMinutes = countMinutes;
-        this.mark = mark;
         Name = name;
-        Games = countGames;
         Url = url;
-        Players = countPlayers;
         Description = description;
     }
 
-    public void AddReview(params Review[] reviews) => this.reviews.AddRange(reviews);
-    public IEnumerable<Review> GetReviews => reviews;
+    public void AddReview(params Review[] reviews) => _reviews.AddRange(reviews);
+    public void AddGame(params Game[] games) => _games.AddRange(games);
+    public IEnumerable<Review> GetReviews => _reviews;
+    public IEnumerable<Game> GetGames => _games;
 
-    public float Mark => mark / Players;
-    public float Time => (float)countMinutes / Games;
+    public float Mark => SumMarkReview / PlayersReview;
+    public float Time => _games.Count == 0 ? -1 : (float)CountMinutes / Games;
 }
 
 public class Review
@@ -47,3 +50,18 @@ public class Review
         Text = text;
     }
 }
+
+public class Game
+{
+    public int Players { get; private set; }
+    public int Time { get; private set; }
+
+    public string Comment { get; private set; }
+    public Game(int players, int time, string comment)
+    {
+        Players = players;
+        Time = time;
+        Comment = comment;
+    }
+}
+
