@@ -1,3 +1,4 @@
+using Data;
 using States;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,8 @@ public class UIController
             {typeof(ReviewInputState), new ReviewsInputUIStateController(this) },
             {typeof(GamesInfoState), new GamesInfoUIStateController(this) },
             {typeof(GamesInfoInputState), new GamesInfoInputUIStateController(this) },
+            {typeof(CharactersState), new CharactersUIStateController(this) },
+            {typeof(CharacterNewInputState), new CharacterNewInputUIStateController(this) },
         };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;

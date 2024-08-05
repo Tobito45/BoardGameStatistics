@@ -10,14 +10,16 @@ namespace States
     {
         public IState ActualState { get; private set; }
         
-        private MainState _mainState;
-        private GameState _gameState;
-        private ActionsState _actionsState;
-        private ReviewsState _reviewsState;
-        private ReviewInputState _reviewsInputState;
-        private GamesInfoState _gamesInfoState;
-        private GamesInfoInputState _gamesInfoInputState;
-        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState)
+        private readonly MainState _mainState;
+        private readonly GameState _gameState;
+        private readonly ActionsState _actionsState;
+        private readonly ReviewsState _reviewsState;
+        private readonly ReviewInputState _reviewsInputState;
+        private readonly GamesInfoState _gamesInfoState;
+        private readonly GamesInfoInputState _gamesInfoInputState;
+        private readonly CharactersState _charactersState;
+        private readonly CharacterNewInputState _charactersNewInputState;
+        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState)
         {
             _mainState = mainState;
             _gameState = gameState;
@@ -26,6 +28,8 @@ namespace States
             _reviewsInputState = reviewsInputState;
             _gamesInfoState = gamesInfoState;
             _gamesInfoInputState = gamesInfoInputState;
+            _charactersState = charactersState;
+            _charactersNewInputState = charactersNewInputState;
 
             Intialize(_mainState);
         }
@@ -50,5 +54,7 @@ namespace States
         public void SetReviewsInputState() => TransitionTo(_reviewsInputState);
         public void SetGamesInfoState() => TransitionTo(_gamesInfoState);
         public void SetGamesInfoInputState() => TransitionTo(_gamesInfoInputState);
+        public void SetCharactersState() => TransitionTo(_charactersState);
+        public void SetCharacterNewInputState() => TransitionTo(_charactersNewInputState);
     }
 }

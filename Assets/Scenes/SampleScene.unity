@@ -205,6 +205,7 @@ Transform:
   - {fileID: 657310578}
   - {fileID: 603423066}
   - {fileID: 586619933}
+  - {fileID: 1399607254}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
@@ -381,6 +382,7 @@ MonoBehaviour:
   _actions: {fileID: 657310579}
   _reviews: {fileID: 603423065}
   _reviewsInput: {fileID: 586619934}
+  _gamesInput: {fileID: 1399607255}
 --- !u!1 &586619932
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +574,54 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: c50a67236ac7f5c4a8488bbdb0a53cbf, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: c99c9e2aa5bbc1c4c9f0f23771b84253, type: 3}
+  m_SortingOrder: 0
+--- !u!1 &1399607253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1399607254}
+  - component: {fileID: 1399607255}
+  m_Layer: 0
+  m_Name: GameInputMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1399607254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399607253}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 477768666}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1399607255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399607253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: c50a67236ac7f5c4a8488bbdb0a53cbf, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 48e857f00feeea948bdb829f582dd850, type: 3}
   m_SortingOrder: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

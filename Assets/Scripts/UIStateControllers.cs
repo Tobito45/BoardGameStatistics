@@ -1,3 +1,4 @@
+using Data;
 using States;
 using System.Collections;
 using System.Collections.Generic;
@@ -96,6 +97,7 @@ namespace UIStateControllers
             visualElement.Q<Button>("BackButton").clicked += () => StateMachine.SetGameState();
             visualElement.Q<Button>("ButtonReview").clicked += () => StateMachine.SetReviewsState();
             visualElement.Q<Button>("ButtonGame").clicked += () => StateMachine.SetGamesInfoState();
+            visualElement.Q<Button>("ButtonCharacters").clicked += () => StateMachine.SetCharactersState();
         }
 
         public override void Clear(VisualElement visualElement) { }
@@ -296,6 +298,105 @@ namespace UIStateControllers
             
             _uIController.GetActualData.AddGame(new Game((int)textFieldPlayers.value, (int)textFieldTime.value, comment));
             StateMachine.SetGamesInfoState();
+        }
+    }
+
+    public class CharactersUIStateController : UIStateControllerBase
+    {
+        VisualTreeAsset prefabCharactersElement, prefabPlusElement;
+
+        public CharactersUIStateController(UIController uIController) : base(uIController) { }
+
+        public override void Installization(VisualElement visualElement)
+        {
+            visualElement.Q<Button>("BackButton").clicked += () => StateMachine.SetActionsState();
+            prefabCharactersElement = Resources.Load<VisualTreeAsset>("CharacterElement");
+            prefabPlusElement = Resources.Load<VisualTreeAsset>("PlusElement");
+        }
+        public override void Clear(VisualElement visualElement) { }
+
+        public override void Update(VisualElement visualElement)
+        {
+            //   if (int.Parse(visualElement.Q<Label>("Players").text) != ActualData.Players
+            //       || ActualData.GetGames.Count() != visualElement.Q<ScrollView>("List").childCount + 1)
+            {
+                visualElement.Q<ScrollView>("List").Clear();
+
+                visualElement.Q<Label>("Name").text = ActualData.Name;
+                ScrollView listView = visualElement.Q<ScrollView>("List");
+                foreach (Character character in ActualData.GetCharacters)
+                {
+                    VisualElement itemUi = prefabCharactersElement.Instantiate();
+                    itemUi.Q<Label>("Name").text = character.Name;
+                    itemUi.Q<Label>("Games").text = character.Games.ToString();
+                    itemUi.Q<Label>("Wins").text = character.Wins.ToString();
+                    itemUi.Q<Label>("Percents").text = character.Percent.ToString("F1");
+                    listView.Add(itemUi);
+                }
+                VisualElement plus = prefabPlusElement.Instantiate();
+                listView.Add(plus);
+                plus.Q<Button>("Add").clicked += () => StateMachine.SetCharacterNewInputState();
+            }
+        }
+    }
+
+    public class CharacterNewInputUIStateController : UIStateControllerBase
+    {
+        public CharacterNewInputUIStateController(UIController uIController) : base(uIController) { }
+
+        public override void Installization(VisualElement visualElement)
+        {
+            visualElement.Q<Button>("BackButton").clicked += () => StateMachine.SetCharactersState();
+            visualElement.Q<Button>("AddButton").clicked += () => SaveNewCharacter(visualElement);
+        }
+        public override void Clear(VisualElement visualElement) { }
+
+        public override void Update(VisualElement visualElement)
+        {
+            Debug.Log(visualElement.name);
+            UnsignedIntegerField textFieldGames = visualElement.Q<UnsignedIntegerField>("GamesInput");
+            UnsignedIntegerField textFieldWins = visualElement.Q<UnsignedIntegerField>("WinsInput");
+            TextField textFieldName = visualElement.Q<TextField>("NameInput");
+            textFieldGames.value = 0;
+            textFieldWins.value = 0;
+            textFieldName.value = string.Empty;
+            _uIController.SetInputFieldColor(textFieldGames, Color.white, 0);
+            _uIController.SetInputFieldColor(textFieldWins, Color.white, 0);
+            _uIController.SetInputFieldColor(textFieldName, Color.white, 0);
+        }
+
+        private bool Validate(UnsignedIntegerField textFieldGames, UnsignedIntegerField textFieldWins, TextField textFieldName)
+        {
+            bool result = true;
+            if (textFieldGames.value == 0)
+            {
+                _uIController.SetInputFieldColor(textFieldGames, Color.red, 2);
+                result = false;
+            }
+            if (textFieldWins.value == 0)
+            {
+                _uIController.SetInputFieldColor(textFieldWins, Color.red, 2);
+                result = false;
+            }
+            if (textFieldName.value == string.Empty)
+            {
+                _uIController.SetInputFieldColor(textFieldName, Color.red, 2);
+                result = false;
+            }
+            return result;
+        }
+
+        private void SaveNewCharacter(VisualElement visualElement)
+        {
+            UnsignedIntegerField textFieldGames = visualElement.Q<UnsignedIntegerField>("GamesInput");
+            UnsignedIntegerField textFieldWins = visualElement.Q<UnsignedIntegerField>("WinsInput");
+            TextField textFieldName = visualElement.Q<TextField>("NameInput");
+
+            if (!Validate(textFieldGames, textFieldWins, textFieldName))
+                return;
+
+            _uIController.GetActualData.AddCharacter(new Character(textFieldName.value, (int)textFieldGames.value, (int)textFieldWins.value));
+            StateMachine.SetCharactersState();
         }
     }
 }

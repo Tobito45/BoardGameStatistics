@@ -1,10 +1,6 @@
 using System.Collections.Generic;
-using System.Data;
+using Data;
 using Unity.VisualScripting;
-using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using UnityEngine.UIElements;
-using UnityEngine.XR;
 
 public class GameDataFactory
 {
@@ -25,6 +21,7 @@ public class GameDataFactory
 
         CreatingReviews();
         CreateGames();
+        CreateCharacters();
     }
 
     private void CreatingReviews()
@@ -38,6 +35,11 @@ public class GameDataFactory
     {
         data[0].AddGame(new Game(5, 180, ""), new Game(4, 260, "Ebat trahniu mena"), new Game(5, 360, ""), new Game(5, 200, "Can't recommend this game enough.\r\n\r\nVery good at 2,3 and 5. Components are very well designed. With 3k+ hours on the video game, I can tell that multiple aspects of the game are VERY WELL implemented into the game.\r\n\r\nIt's hard to win as killer until the player in that role has a lot of experience.\r\n\r\nI recommend a SMALL house rule until then, if the players are able to power the door on the last round, you still play the killer's turn. If the killer reaches his wincon before the end of the game, he wins instead of the survivors. It will help smooth out the stats (because even with that small rule, we still had about only a 30% winrate on killer)."));
         data[2].AddGame(new Game(4, 60, ""), new Game(6, 140, ""), new Game(4, 80, ""), new Game(5, 120, ""));
+    }
+
+    private void CreateCharacters()
+    {
+        data[0].AddCharacter(new Character("Trapper", 2, 2), new Character("Billi", 10, 0), new Character("Nursa", 120, 100));
     }
 
     public IEnumerable<GameData> GetData() => data;

@@ -6,7 +6,7 @@ using Zenject;
 public class SceneInstaller : MonoInstaller
 {
     [SerializeField]
-    private UIDocument _main, _game, _actions, _reviews, _reviewsInput, _gamesInput;
+    private UIDocument _main, _game, _actions, _reviews, _reviewsInput, _gamesInput, _characterNewInput;
 
     public override void InstallBindings()
     {
@@ -25,6 +25,8 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<ReviewInputState>().AsSingle().WithArguments(_reviewsInput.rootVisualElement);
         Container.Bind<GamesInfoState>().AsSingle().WithArguments(_reviews.rootVisualElement);
         Container.Bind<GamesInfoInputState>().AsSingle().WithArguments(_gamesInput.rootVisualElement);
+        Container.Bind<CharactersState>().AsSingle().WithArguments(_reviews.rootVisualElement);
+        Container.Bind<CharacterNewInputState>().AsSingle().WithArguments(_characterNewInput.rootVisualElement);
         Container.Bind<StateMachine>().AsSingle().NonLazy();
     }
 }

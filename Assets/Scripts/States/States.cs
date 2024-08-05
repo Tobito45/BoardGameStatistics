@@ -94,5 +94,26 @@ namespace States {
             base.Entry();
         }
     }
+    public class CharactersState : BaseState, IState
+    {
+        public CharactersState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
+        {
+        }
+    }
+
+    public class CharacterNewInputState : BaseState, IState
+    {
+        private readonly CharactersState _characterState;
+
+        public CharacterNewInputState(VisualElement visualElement, CharactersState characterState, UIController uIController) : base(visualElement, uIController)
+        {
+            _characterState = characterState;
+        }
+        public override void Entry()
+        {
+            _characterState.VisualElement.style.display = DisplayStyle.Flex;
+            base.Entry();
+        }
+    }
 }
 
