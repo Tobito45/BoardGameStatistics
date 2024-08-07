@@ -1,11 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.UIElements;
 
 namespace Data
 {
@@ -82,6 +76,11 @@ namespace Data
             Name = name;
             Games = games;
             Wins = wins;
+        }
+        public void ChangeStats(int newGames, int newWins)
+        {
+            Games = newGames;
+            Wins = newWins;
         }
     }
 }

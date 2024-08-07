@@ -1,8 +1,7 @@
-using UnityEditor.IMGUI.Controls;
-using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace States {
+namespace States
+{
     public interface IState
     {
         public void Entry();
@@ -106,6 +105,21 @@ namespace States {
         private readonly CharactersState _characterState;
 
         public CharacterNewInputState(VisualElement visualElement, CharactersState characterState, UIController uIController) : base(visualElement, uIController)
+        {
+            _characterState = characterState;
+        }
+        public override void Entry()
+        {
+            _characterState.VisualElement.style.display = DisplayStyle.Flex;
+            base.Entry();
+        }
+    }
+
+    public class CharacterChangeInputState : BaseState, IState
+    {
+        private readonly CharactersState _characterState;
+
+        public CharacterChangeInputState(VisualElement visualElement, CharactersState characterState, UIController uIController) : base(visualElement, uIController)
         {
             _characterState = characterState;
         }

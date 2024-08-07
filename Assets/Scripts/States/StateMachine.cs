@@ -19,7 +19,8 @@ namespace States
         private readonly GamesInfoInputState _gamesInfoInputState;
         private readonly CharactersState _charactersState;
         private readonly CharacterNewInputState _charactersNewInputState;
-        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState)
+        private readonly CharacterChangeInputState _charactersChangeInputState;
+        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState)
         {
             _mainState = mainState;
             _gameState = gameState;
@@ -30,9 +31,16 @@ namespace States
             _gamesInfoInputState = gamesInfoInputState;
             _charactersState = charactersState;
             _charactersNewInputState = charactersNewInputState;
+            _charactersChangeInputState = charactersChangeInputState;
 
             Intialize(_mainState);
         }
+        /*public StateMachine(MainState mainState)
+        {
+            _mainState = mainState;
+            Intialize(_mainState);
+
+        }*/
 
         private void Intialize(IState startState)
         {
@@ -56,5 +64,6 @@ namespace States
         public void SetGamesInfoInputState() => TransitionTo(_gamesInfoInputState);
         public void SetCharactersState() => TransitionTo(_charactersState);
         public void SetCharacterNewInputState() => TransitionTo(_charactersNewInputState);
+        public void SetCharacterChangeInputState() => TransitionTo(_charactersChangeInputState);
     }
 }

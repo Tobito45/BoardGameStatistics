@@ -3,6 +3,7 @@ using States;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -264,8 +265,7 @@ namespace UIStateControllers
         {
             UnsignedIntegerField textFieldPlayers = visualElement.Q<UnsignedIntegerField>("PlayersInput");
             UnsignedIntegerField textFieldTime = visualElement.Q<UnsignedIntegerField>("TimeInput");
-            textFieldPlayers.value = 0;
-            textFieldTime.value = 0;
+            textFieldPlayers.value = textFieldTime.value = 0;
             _uIController.SetInputFieldColor(textFieldPlayers, Color.white, 0);
             _uIController.SetInputFieldColor(textFieldTime, Color.white, 0);
             visualElement.Q<TextField>("TextInput").value = string.Empty;
@@ -331,6 +331,11 @@ namespace UIStateControllers
                     itemUi.Q<Label>("Games").text = character.Games.ToString();
                     itemUi.Q<Label>("Wins").text = character.Wins.ToString();
                     itemUi.Q<Label>("Percents").text = character.Percent.ToString("F1");
+                    itemUi.Q<Button>("AddButton").clicked += () =>
+                    {
+                        _uIController.ActualCharater = character;
+                        StateMachine.SetCharacterChangeInputState();
+                    };
                     listView.Add(itemUi);
                 }
                 VisualElement plus = prefabPlusElement.Instantiate();
@@ -340,6 +345,7 @@ namespace UIStateControllers
         }
     }
 
+   
     public class CharacterNewInputUIStateController : UIStateControllerBase
     {
         public CharacterNewInputUIStateController(UIController uIController) : base(uIController) { }
@@ -353,7 +359,6 @@ namespace UIStateControllers
 
         public override void Update(VisualElement visualElement)
         {
-            Debug.Log(visualElement.name);
             UnsignedIntegerField textFieldGames = visualElement.Q<UnsignedIntegerField>("GamesInput");
             UnsignedIntegerField textFieldWins = visualElement.Q<UnsignedIntegerField>("WinsInput");
             TextField textFieldName = visualElement.Q<TextField>("NameInput");
@@ -399,4 +404,74 @@ namespace UIStateControllers
             StateMachine.SetCharactersState();
         }
     }
+    public class CharacterChangeInputUIStateController : UIStateControllerBase
+    {
+        private Label _totalGames, _totalWins, _games, _wins;
+        public CharacterChangeInputUIStateController(UIController uIController) : base(uIController) { }
+       
+        public override void Installization(VisualElement visualElement)
+        {
+
+            visualElement.Q<Button>("BackButton").clicked += () => StateMachine.SetCharactersState();
+            visualElement.Q<Button>("AddButton").clicked += () => SaveCharacter(visualElement);
+            _totalGames = visualElement.Q<Label>("GamesTotal");
+            _totalWins = visualElement.Q<Label>("WinsTotal");
+            _games = visualElement.Q<Label>("Games");
+            _wins = visualElement.Q<Label>("Wins");
+            visualElement.Q<Button>("PlusGames").clicked += () =>
+            {
+                ChangeStats(1, _totalGames, _games, _uIController.ActualCharater.Games);
+            };
+            visualElement.Q<Button>("MinusGames").clicked += () =>
+                ChangeStats(-1, _totalGames, _games, _uIController.ActualCharater.Games);
+            visualElement.Q<Button>("PlusWins").clicked += () =>
+                ChangeStats(1, _totalWins, _wins, _uIController.ActualCharater.Wins);
+            visualElement.Q<Button>("MinusWins").clicked += () =>
+                ChangeStats(-1, _totalWins, _wins, _uIController.ActualCharater.Wins);
+        }
+        public override void Clear(VisualElement visualElement) { }
+
+        public override void Update(VisualElement visualElement)
+        {
+            visualElement.Q<Label>("Name").text = _uIController.ActualCharater.Name;
+            _games.text = _uIController.ActualCharater.Games.ToString();
+            _wins.text = _uIController.ActualCharater.Wins.ToString();
+            _totalGames.text = _totalWins.text = string.Empty;
+        }
+
+        private void ChangeStats(int koef, Label total, Label orig, int baseCate)
+        {
+            int count = int.Parse(orig.text) + koef;
+            if (count < 0) return;
+
+            orig.text = count.ToString();
+            if (count == baseCate)
+                total.text = string.Empty;
+            else
+            {
+                int differance = count - baseCate;
+                total.text = "Total: ";
+
+                if (differance > 0)
+                {
+                    total.style.color = new StyleColor(Color.green);
+                    total.text += "+" + differance;
+                }
+                else
+                {
+                    total.style.color = new StyleColor(Color.red);
+                    total.text += +differance;
+                }
+
+            }
+
+        }
+
+        private void SaveCharacter(VisualElement visualElement)
+        {
+            _uIController.ActualCharater.ChangeStats(int.Parse(_games.text), int.Parse(_wins.text));
+            StateMachine.SetCharactersState();
+        }
+    }
+
 }

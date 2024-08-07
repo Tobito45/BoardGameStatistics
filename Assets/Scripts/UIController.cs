@@ -15,6 +15,7 @@ public class UIController
     private GameDataFactory _gameDataFactory;
     private GameData _actualData;
     public StateMachine StateMachine { get; private set; }
+    public  Character ActualCharater { get; set; }
 
     private Dictionary<Type, IUIState> _statesControllers;
 
@@ -39,6 +40,7 @@ public class UIController
             {typeof(GamesInfoInputState), new GamesInfoInputUIStateController(this) },
             {typeof(CharactersState), new CharactersUIStateController(this) },
             {typeof(CharacterNewInputState), new CharacterNewInputUIStateController(this) },
+            {typeof(CharacterChangeInputState), new CharacterChangeInputUIStateController(this) },
         };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;
