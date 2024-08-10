@@ -138,7 +138,11 @@ namespace UIStateControllers
                 }
                 VisualElement plus = prefabPlusElement.Instantiate();
                 listView.Add(plus);
-                plus.Q<Button>("Add").clicked += () => StateMachine.SetReviewsInputState();
+                plus.Q<Button>("Add").clicked += () =>
+                {
+                    StateMachine.SetReviewsInputState();
+                    Debug.Log(_uIController.StateMachine.ActualState);
+                };
             }
         }
     }

@@ -1,4 +1,5 @@
 using States;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Zenject;
@@ -8,6 +9,8 @@ public class SceneInstaller : MonoInstaller
     [SerializeField]
     private UIDocument _main, _game, _actions, _reviews, _reviewsInput, _gamesInput, _characterNewInput, _characterChangeInput;
 
+    [SerializeField]
+    private SceneContext _sceneContext;
     public override void InstallBindings()
     {
         Container.Bind<GameDataFactory>().AsSingle();
@@ -30,4 +33,16 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<CharacterChangeInputState>().AsSingle().WithArguments(_characterChangeInput.rootVisualElement);
         Container.Bind<StateMachine>().AsSingle().NonLazy();
     }
+
+    private void Start()
+    {
+        StartCoroutine(RunInstaller());
+    }
+
+    private IEnumerator RunInstaller()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _sceneContext.Run();
+    }
+
 }

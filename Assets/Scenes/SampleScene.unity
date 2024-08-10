@@ -384,7 +384,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 569858641}
   _installerPrefabs: []
-  _autoRun: 1
+  _autoRun: 0
   OnPreInstall:
     m_PersistentCalls:
       m_Calls: []
@@ -435,6 +435,7 @@ MonoBehaviour:
   _gamesInput: {fileID: 1399607255}
   _characterNewInput: {fileID: 339600674}
   _characterChangeInput: {fileID: 1419743703}
+  _sceneContext: {fileID: 569858639}
 --- !u!1 &586619932
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +483,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: c50a67236ac7f5c4a8488bbdb0a53cbf, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: e9a85adb4954f7140b4df01ff6f5afb2, type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!1 &603423064
 GameObject:
   m_ObjectHideFlags: 0

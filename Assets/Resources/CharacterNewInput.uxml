@@ -6,7 +6,7 @@
             <ui:VisualElement style="flex-grow: 1; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(125, 125, 125); border-right-color: rgb(125, 125, 125); border-top-color: rgb(125, 125, 125); border-bottom-color: rgb(125, 125, 125); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; height: auto; min-height: auto;">
                 <ui:VisualElement style="flex-grow: 1; height: 20%; max-height: 20%; min-height: 15%;">
                     <ui:Label tabindex="-1" text="Name" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; padding-left: 10px; font-size: 50%;" />
-                    <ui:TextField picking-mode="Ignore" value="Markus" name="NameInput" class="text-field" style="font-size: 70%;" />
+                    <ui:TextField picking-mode="Ignore" value="Markus" name="NameInput" auto-correction="false" class="text-field" style="font-size: 70%;" />
                 </ui:VisualElement>
                 <ui:VisualElement style="flex-grow: 1; height: 20%; max-height: 20%; min-height: 15%;">
                     <ui:Label tabindex="-1" text="Count games" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; padding-left: 10px; font-size: 50%;" />
