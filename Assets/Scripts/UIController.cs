@@ -41,11 +41,11 @@ public class UIController
             {typeof(CharactersState), new CharactersUIStateController(this) },
             {typeof(CharacterNewInputState), new CharacterNewInputUIStateController(this) },
             {typeof(CharacterChangeInputState), new CharacterChangeInputUIStateController(this) },
+            {typeof(GameNewInputState), new GameNewInputUIStateController(this, _gameDataFactory) },
         };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;
     public GameData GetActualData => _actualData;
-
     public IUIState GetController(BaseState state)
     {
         return _statesControllers[state.GetType()];

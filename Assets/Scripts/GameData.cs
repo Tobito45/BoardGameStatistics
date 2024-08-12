@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace Data
 {
+    [System.Serializable]
     public class GameData
     {
         private List<Review> _reviews = new List<Review>();
@@ -18,7 +19,7 @@ namespace Data
         private int PlayersReview => _reviews.Count == 0 ? 1 : _reviews.Count;
         private int CountMinutes => _games.Count == 0 ? 0 : _games.Sum(n => n.Time);
 
-        public GameData(int id, string name, string url, string description)
+        public GameData(string name, string url, string description)
         {
             Name = name;
             Url = url;

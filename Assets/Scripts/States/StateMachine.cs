@@ -20,7 +20,8 @@ namespace States
         private readonly CharactersState _charactersState;
         private readonly CharacterNewInputState _charactersNewInputState;
         private readonly CharacterChangeInputState _charactersChangeInputState;
-        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState)
+        private readonly GameNewInputState _gameNewInputState;
+        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState, GameNewInputState gameNewInputState)
         {
             _mainState = mainState;
             _gameState = gameState;
@@ -32,16 +33,10 @@ namespace States
             _charactersState = charactersState;
             _charactersNewInputState = charactersNewInputState;
             _charactersChangeInputState = charactersChangeInputState;
+            _gameNewInputState = gameNewInputState;
 
             Intialize(_mainState);
         }
-        /*public StateMachine(MainState mainState)
-        {
-            _mainState = mainState;
-            Intialize(_mainState);
-
-        }*/
-
         private void Intialize(IState startState)
         {
             ActualState = startState;
@@ -65,5 +60,6 @@ namespace States
         public void SetCharactersState() => TransitionTo(_charactersState);
         public void SetCharacterNewInputState() => TransitionTo(_charactersNewInputState);
         public void SetCharacterChangeInputState() => TransitionTo(_charactersChangeInputState);
+        public void SetGameNewInputState() => TransitionTo(_gameNewInputState);
     }
 }
