@@ -42,6 +42,7 @@ public class UIController
             {typeof(CharacterNewInputState), new CharacterNewInputUIStateController(this) },
             {typeof(CharacterChangeInputState), new CharacterChangeInputUIStateController(this) },
             {typeof(GameNewInputState), new GameNewInputUIStateController(this, _gameDataFactory) },
+            {typeof(StartScreenState), new StartScreenStateController(this) },
         };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;

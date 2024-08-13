@@ -9,7 +9,7 @@ public class SceneInstaller : MonoInstaller
 {
     [SerializeField]
     private UIDocument _main, _game, _actions, _reviews, _reviewsInput, _gamesInput, _characterNewInput, _characterChangeInput,
-        _gameNewInput;
+        _gameNewInput, _startState;
 
     [SerializeField]
     private SceneContext _sceneContext;
@@ -33,6 +33,7 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<CharacterNewInputState>().AsSingle().WithArguments(_characterNewInput.rootVisualElement);
         Container.Bind<CharacterChangeInputState>().AsSingle().WithArguments(_characterChangeInput.rootVisualElement);
         Container.Bind<GameNewInputState>().AsSingle().WithArguments(_gameNewInput.rootVisualElement);
+        Container.Bind<StartScreenState>().AsSingle().WithArguments(_startState.rootVisualElement);
         Container.Bind<StateMachine>().AsSingle().NonLazy();
     }
 
