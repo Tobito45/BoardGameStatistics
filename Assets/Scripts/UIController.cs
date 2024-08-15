@@ -14,6 +14,8 @@ public class UIController
 {
     private GameDataFactory _gameDataFactory;
     private GameData _actualData;
+    private Texture2D _loadingSprite, _errorSprite;
+
     public StateMachine StateMachine { get; private set; }
     public  Character ActualCharater { get; set; }
 
@@ -25,9 +27,11 @@ public class UIController
         StateMachine = stateMachine;
     }
 
-    public  UIController(GameDataFactory gameDataFactory)
+    public UIController(GameDataFactory gameDataFactory)
     {
         _gameDataFactory = gameDataFactory;
+        _loadingSprite = Resources.Load<Texture2D>("Pictures/loading");
+        _errorSprite = Resources.Load<Texture2D>("Pictures/error");
 
         _statesControllers = new Dictionary<Type, IUIState>()
         {
@@ -43,6 +47,7 @@ public class UIController
             {typeof(CharacterChangeInputState), new CharacterChangeInputUIStateController(this) },
             {typeof(GameNewInputState), new GameNewInputUIStateController(this, _gameDataFactory) },
             {typeof(StartScreenState), new StartScreenStateController(this) },
+            {typeof(UrlInputState), new UrlInputUIStateController(this) },
         };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;
@@ -50,12 +55,20 @@ public class UIController
     public IUIState GetController(BaseState state)
     {
         return _statesControllers[state.GetType()];
-    } 
+    }
     public async void LoadImageAsync(VisualElement image, string url)
     {
-        Texture2D texture = await GetTextureFromUrlAsync(url);
-        if (texture != null)
-            image.style.backgroundImage = new StyleBackground(texture);
+        image.style.backgroundImage = _loadingSprite;
+        if (url != string.Empty)
+        {
+            Texture2D texture = await GetTextureFromUrlAsync(url);
+            if (texture != null)
+            {
+                image.style.backgroundImage = new StyleBackground(texture);
+                return;
+            }
+        }
+        image.style.backgroundImage = _errorSprite;
     }
 
     private async Task<Texture2D> GetTextureFromUrlAsync(string url)

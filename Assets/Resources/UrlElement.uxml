@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/main.uss?fileID=7433441132597879392&amp;guid=650e524d0495a1e48982b2cb80a88675&amp;type=3#main" />
+    <ui:VisualElement name="UrlElement" style="flex-grow: 1; width: 800px; align-self: center; height: 500px; background-color: rgb(91, 91, 91); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; margin-top: 15px; margin-bottom: 15px;">
+        <ui:VisualElement style="flex-grow: 1; height: 30%; max-height: 30%; min-height: 30%;">
+            <ui:Label tabindex="-1" text="Url:" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UrllInput" class="white-text" style="-unity-text-align: middle-left; padding-left: 10px; font-size: 50%;" />
+            <ui:TextField picking-mode="Ignore" name="NameInput" class="text-field" style="font-size: 70%;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: center;">
+            <ui:VisualElement name="Image" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Images/loading.png?fileID=2800000&amp;guid=898555360784e1341af5535ed233b6f7&amp;type=3#loading&apos;); -unity-background-scale-mode: scale-to-fit; width: 75%; max-width: 75%; min-width: 75%; height: 90%; max-height: 90%; min-height: 90%; margin-left: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;" />
+            <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteButton" class="plus-button" style="width: 20%; max-width: 20%; min-width: 20%; height: 100%; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); background-image: url(&apos;project://database/Assets/Images/8664938_trash_can_delete_remove_icon.png?fileID=2800000&amp;guid=3d7e4cb336b114143b7727e5e4b0df6f&amp;type=3#8664938_trash_can_delete_remove_icon&apos;); -unity-background-scale-mode: scale-to-fit; margin-right: 6px; align-self: auto; max-height: 100%; min-height: 100%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

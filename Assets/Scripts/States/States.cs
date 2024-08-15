@@ -121,5 +121,19 @@ namespace States
         {
         }
     }
+    public class UrlInputState : BaseState, IState
+    {
+        private readonly GameState _gameState;
+
+        public UrlInputState(VisualElement visualElement, GameState gameState, UIController uIController) : base(visualElement, uIController)
+        {
+            _gameState = gameState;
+        }
+        public override void Entry()
+        {
+            _gameState.VisualElement.style.display = DisplayStyle.Flex;
+            base.Entry();
+        }
+    }
 }
 

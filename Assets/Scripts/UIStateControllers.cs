@@ -6,6 +6,7 @@ using System.Linq;
 using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
 namespace UIStateControllers
 {
@@ -80,18 +81,39 @@ namespace UIStateControllers
     }
     public class GameUIStateController : UIStateControllerBase
     {
+
         public GameUIStateController(UIController uIController) : base(uIController) { }
 
         public override void Installization(VisualElement visualElement)
         {
+            VisualElement image = visualElement.Q<VisualElement>("ImagesList");
+
             visualElement.Q<Button>("BackButton").clicked += () => StateMachine.SetMainState();
             visualElement.Q<Button>("ButtonActions").clicked += () => StateMachine.SetActionsState();
+            image.RegisterCallback<PointerDownEvent>(evt =>
+            {
+                if(ActualData.Index == ActualData.GetUrls.Count() - 1)
+                    _uIController.StateMachine.SetUrlInputState();
+            });
+            visualElement.Q<Button>("RightButton").clicked += () =>
+            {
+                _uIController.LoadImageAsync(image, ActualData.MoveNextPicture());
+                visualElement.Q<Label>("CountPictures").text = $"{ActualData.Index + 1}/{ActualData.GetUrls.Count()}";
+            };
+            visualElement.Q<Button>("LeftButton").clicked += () =>
+            {
+                _uIController.LoadImageAsync(image, ActualData.MovePreviusPicture());
+                visualElement.Q<Label>("CountPictures").text = $"{ActualData.Index + 1}/{ActualData.GetUrls.Count()}";
+            };
+
         }
 
         public override void Clear(VisualElement visualElement) { }
 
         public override void Update(VisualElement visualElement)
         {
+            _uIController.LoadImageAsync(visualElement.Q<VisualElement>("ImagesList"), ActualData.GetCurrent());
+            visualElement.Q<Label>("CountPictures").text = $"{ActualData.Index + 1}/{ActualData.GetUrls.Count()}";
             visualElement.Q<Label>("Name").text = ActualData.Name;
             visualElement.Q<Label>("GameLength").text = $"{(ActualData.Time == -1 ? '-' : ActualData.Time.ToString("F1"))} min";
             visualElement.Q<Label>("Players").text = ActualData.Players == -1 ? "-" : ActualData.Players.ToString("F1");
@@ -565,5 +587,76 @@ namespace UIStateControllers
         public override void Clear(VisualElement visualElement) { }
 
         public override void Update(VisualElement visualElement) { }
+    }
+
+    public class UrlInputUIStateController : UIStateControllerBase
+    {
+        VisualTreeAsset _prefabUrlElement, _prefabPlusElement;
+        Sprite _loadingSprite;
+
+        public UrlInputUIStateController(UIController uIController) : base(uIController) {}
+
+        public override void Installization(VisualElement visualElement)
+        {
+            _prefabUrlElement = Resources.Load<VisualTreeAsset>("UrlElement");
+            _prefabPlusElement = Resources.Load<VisualTreeAsset>("UrlPlusElement");
+            _loadingSprite = Resources.Load<Sprite>("Pictures/loading");
+            visualElement.Q<Button>("BackButton").clicked += () => StateMachine.SetGameState();
+            visualElement.Q<Button>("AddButton").clicked += () => SaveNewUrlList(visualElement.Q<ScrollView>("List"));
+        }
+        public override void Clear(VisualElement visualElement) { }
+
+        public override void Update(VisualElement visualElement)
+        {
+            ScrollView list = visualElement.Q<ScrollView>("List");
+            list.Clear();
+
+            foreach(string str in ActualData.GetUrls)
+            {
+                if (str == GameDataFactory.URL_LOADING)
+                    continue;
+                
+                CreateListItem(list, str);
+            }
+            VisualElement plus = _prefabPlusElement.Instantiate();
+            list.Add(plus);
+            plus.Q<Button>("Plus").clicked += () => { 
+                CreateListItem(list, string.Empty);
+            };
+        }
+
+        private void CreateListItem(ScrollView list, string str)
+        {
+            VisualElement itemUi = _prefabUrlElement.Instantiate();
+            TextField textField = itemUi.Q<TextField>("NameInput");
+            textField.value = str;
+            textField.RegisterCallback<ChangeEvent<string>>(evt => _uIController.LoadImageAsync(itemUi.Q<VisualElement>("Image"), evt.newValue));
+            _uIController.LoadImageAsync(itemUi.Q<VisualElement>("Image"), str);
+            
+            itemUi.Q<Button>("DeleteButton").clicked += () =>
+            {
+                ActualData.RemoveUrl(str);
+                list.Remove(itemUi);
+            };
+            if (str != string.Empty)
+                list.Add(itemUi);
+            else
+                list.Insert(list.childCount - 1, itemUi);
+        }
+
+        private void SaveNewUrlList(ScrollView list)
+        {
+            List<string> newUrls = new List<string>();
+            foreach (VisualElement visualElement in list.Query<VisualElement>("UrlElement").ToList())
+            {
+                string str = visualElement.Q<TextField>("NameInput").value;
+                if (visualElement.Q<VisualElement>("Image").style.backgroundImage != null)
+                    newUrls.Add(str);
+            }
+            newUrls.Add(GameDataFactory.URL_LOADING);
+            ActualData.SetNewListUrl(newUrls);
+
+            StateMachine.SetGameState();
+        }
     }
 }

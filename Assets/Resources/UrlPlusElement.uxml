@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/main.uss?fileID=7433441132597879392&amp;guid=650e524d0495a1e48982b2cb80a88675&amp;type=3#main" />
+    <ui:VisualElement style="flex-grow: 1; width: 800px; align-self: center; height: 300px; background-color: rgb(91, 91, 91); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; max-height: 300px; min-height: 300px; max-width: 800px; min-width: 800px; margin-top: 15px; margin-bottom: 15px;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
+            <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Plus" class="plus-button" style="width: 80%; max-width: 80%; min-width: 80%; height: 80%; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); background-image: url(&apos;project://database/Assets/Images/1564491_add_create_new_plus_icon.png?fileID=2800000&amp;guid=59fdc19aa62355e4f97c1b518f7955e4&amp;type=3#1564491_add_create_new_plus_icon&apos;); -unity-background-scale-mode: scale-to-fit; margin-right: 6px; align-self: auto; max-height: 80%; min-height: 80%; justify-content: flex-start;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
