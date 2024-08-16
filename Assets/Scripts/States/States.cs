@@ -4,29 +4,21 @@ namespace States
 {
     public class MainState : BaseState, IState
     {
-        public MainState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
-        {
-        }
+        public MainState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController) { }
     }
 
     public class GameState : BaseState, IState
     {
-        public GameState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
-        {
-        }
+        public GameState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController) { }
     }
     public class ActionsState : BaseState, IState
     {
-        public ActionsState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
-        {
-        }
+        public ActionsState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController) { }
     }
 
     public class ReviewsState : BaseState, IState
     {
-        public ReviewsState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
-        {
-        }
+        public ReviewsState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController){ }
     }
     public class ReviewInputState : BaseState, IState
     {
@@ -45,9 +37,7 @@ namespace States
     }
     public class GamesInfoState : BaseState, IState
     {
-        public GamesInfoState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
-        {
-        }
+        public GamesInfoState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController) { }
     }
     public class GamesInfoInputState : BaseState, IState
     {
@@ -65,9 +55,7 @@ namespace States
     }
     public class CharactersState : BaseState, IState
     {
-        public CharactersState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
-        {
-        }
+        public CharactersState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController) { }
     }
 
     public class CharacterNewInputState : BaseState, IState
@@ -117,9 +105,7 @@ namespace States
 
     public class StartScreenState : BaseState, IState
     {
-        public StartScreenState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController)
-        {
-        }
+        public StartScreenState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController) { }
     }
     public class UrlInputState : BaseState, IState
     {
