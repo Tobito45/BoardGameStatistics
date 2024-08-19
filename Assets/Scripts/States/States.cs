@@ -121,5 +121,22 @@ namespace States
             base.Entry();
         }
     }
+    public class GamesCharacterInputState : BaseState, IState
+    {
+        private readonly GamesInfoState _gamesInfoState;
+        private readonly GamesInfoInputState _gameInfoInputState;
+
+        public GamesCharacterInputState(VisualElement visualElement, GamesInfoInputState gameInfoInputState, UIController uIController, GamesInfoState gamesInfoState) : base(visualElement, uIController)
+        {
+            _gameInfoInputState = gameInfoInputState;
+            _gamesInfoState = gamesInfoState;
+        }
+        public override void Entry()
+        {
+            _gameInfoInputState.VisualElement.style.display = DisplayStyle.Flex;
+            _gamesInfoState.VisualElement.style.display = DisplayStyle.Flex;
+            base.Entry();
+        }
+    }
 }
 

@@ -23,7 +23,8 @@ namespace States
         private readonly GameNewInputState _gameNewInputState;
         private readonly StartScreenState _startScreenState;
         private readonly UrlInputState _urlInput;
-        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState, GameNewInputState gameNewInputState, StartScreenState startScreenState, UrlInputState urlInput)
+        private readonly GamesCharacterInputState _gamesCharacterInputState;
+        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState, GameNewInputState gameNewInputState, StartScreenState startScreenState, UrlInputState urlInput, GamesCharacterInputState gamesCharacterInputState)
         {
             _mainState = mainState;
             _gameState = gameState;
@@ -38,6 +39,7 @@ namespace States
             _gameNewInputState = gameNewInputState;
             _startScreenState = startScreenState;
             _urlInput = urlInput;
+            _gamesCharacterInputState = gamesCharacterInputState;
 
             Intialize(_mainState);
         }
@@ -67,5 +69,6 @@ namespace States
         public void SetGameNewInputState() => TransitionTo(_gameNewInputState);
         public void SetStartScreenState() => TransitionTo(_startScreenState);
         public void SetUrlInputState() => TransitionTo(_urlInput);
+        public void SetGamesCharacterInputState() => TransitionTo(_gamesCharacterInputState);
     }
 }

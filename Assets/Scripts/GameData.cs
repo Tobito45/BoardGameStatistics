@@ -86,15 +86,36 @@ namespace Data
 
     public class Game
     {
-        public int Players { get; private set; }
-        public int Time { get; private set; }
-
-        public string Comment { get; private set; }
+        public int Players { get; set; }
+        public int Time { get; set; }
+        public List<(Character, int)> Winners { get; private set; }
+        public List<(Character, int)> Losers { get; private set; }
+        public bool isLoser = false;
+        public string Comment { get; set; }
         public Game(int players, int time, string comment)
         {
             Players = players;
             Time = time;
             Comment = comment;
+            CreateLists();
+        }
+        public Game()
+        {
+            CreateLists();
+        }
+
+        public void CreateLists()
+        {
+            Winners = new List<(Character, int)>();
+            Losers = new List<(Character, int)>();
+        }
+
+        public void AddNewCharacter(Character character, int points)
+        {
+            if (isLoser)
+                Losers.Add((character, points));
+            else
+                Winners.Add((character, points));
         }
     }
 
@@ -103,18 +124,44 @@ namespace Data
         public string Name { get; private set; }
         public int Games { get; private set; }
         public int Wins { get; private set; }
-
+        public int Points { get; private set; }
         public float Percent => Games == 0 ? 0 : (float)Wins / Games * 100;
-        public Character(string name, int games, int wins)
+        public float AveragePoints => Games == 0 ? 0 : (float)Points / Games;
+        public Character(string name)//, int games, int wins)
         {
             Name = name;
-            Games = games;
-            Wins = wins;
+           // Games = games;
+           // Wins = wins;
         }
         public void ChangeStats(int newGames, int newWins)
         {
             Games = newGames;
             Wins = newWins;
+        }
+        public void CalculateData(IEnumerable<List<(Character, int)>> winsList, IEnumerable<List<(Character, int)>> losesList)
+        {
+            int wins = 0, games = 0, points = 0;
+
+            foreach(var list in winsList) 
+                CalculateList(list, ref wins, ref games, ref points);
+            foreach (var list in losesList)
+                CalculateList(list, ref wins, ref games, ref points, false);
+            Wins = wins;
+            Games = games;
+            Points = points;
+        }
+
+        private void CalculateList(List<(Character, int)> list, ref int wins, ref int games, ref int points, bool isWins = true)
+        {
+            foreach ((Character character, int characterPoints) in list)
+            {
+                if (character.Name.Equals(this.Name))
+                {
+                    if (isWins) wins++;
+                    games++;
+                    points += characterPoints;
+                }
+            }
         }
     }
 }

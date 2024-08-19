@@ -1,23 +1,39 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/main.uss?fileID=7433441132597879392&amp;guid=650e524d0495a1e48982b2cb80a88675&amp;type=3#main" />
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.82); justify-content: center;">
-        <ui:VisualElement name="VisualElement" class="gray-panel" style="flex-grow: 1; width: 80%; align-items: stretch; align-self: center; height: 60%; max-height: 60%; justify-content: flex-start;">
-            <ui:Label tabindex="-1" text="New game" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="font-size: 100%; -unity-text-align: upper-center; height: 10%; max-height: 10%; min-height: 10%;" />
+        <ui:VisualElement name="VisualElement" class="gray-panel" style="flex-grow: 1; width: 80%; align-items: stretch; align-self: center; height: 80%; max-height: 80%; justify-content: flex-start;">
+            <ui:Label tabindex="-1" text="New game" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="font-size: 100%; -unity-text-align: upper-center; height: 7%; max-height: 7%; min-height: 7%;" />
             <ui:VisualElement style="flex-grow: 1; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(125, 125, 125); border-right-color: rgb(125, 125, 125); border-top-color: rgb(125, 125, 125); border-bottom-color: rgb(125, 125, 125); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; height: auto;">
-                <ui:VisualElement style="flex-grow: 1; height: 15%; max-height: 15%; min-height: 15%;">
+                <ui:VisualElement style="flex-grow: 1; height: 10%; max-height: 10%; min-height: 10%;">
                     <ui:Label tabindex="-1" text="Players count:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; padding-left: 10px; font-size: 50%;" />
                     <ui:UnsignedIntegerField value="42" name="PlayersInput" class="text-field" style="font-size: 70%;" />
                 </ui:VisualElement>
-                <ui:VisualElement style="flex-grow: 1; height: 15%; max-height: 15%; min-height: 15%;">
+                <ui:VisualElement style="flex-grow: 1; height: 10%; max-height: 10%; min-height: 10%;">
                     <ui:Label tabindex="-1" text="Game duration (in min):" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; padding-left: 10px; font-size: 50%;" />
                     <ui:UnsignedIntegerField value="42" name="TimeInput" class="text-field" style="font-size: 70%;" />
                 </ui:VisualElement>
-                <ui:VisualElement style="flex-grow: 1; height: 35%; max-height: 35%; min-height: 35%;">
+                <ui:VisualElement style="flex-grow: 1; height: 20%; max-height: 20%; min-height: 20%;">
                     <ui:Label tabindex="-1" text="Comment:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; padding-left: 10px; font-size: 50%;" />
                     <ui:TextField picking-mode="Ignore" value="This game is..." multiline="true" name="TextInput" class="text-field" style="height: 70%; max-height: 70%; min-height: 70%; font-size: 70%; margin-left: 10px; margin-right: 10px;" />
                 </ui:VisualElement>
-                <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddButton" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 10%; max-height: 10%; min-height: 10%; margin-top: 50px; font-size: 80%; margin-bottom: 20px;" />
-                <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 10%; max-height: 10%; min-height: 10%; margin-top: 50px; font-size: 80%; justify-content: flex-start;" />
+                <ui:VisualElement style="flex-grow: 1; min-width: auto; min-height: auto; flex-direction: row;">
+                    <ui:VisualElement name="VisualElement" style="flex-grow: 1; width: 50%; max-width: 50%;">
+                        <ui:VisualElement style="flex-grow: 1; flex-direction: row; height: 10%; max-height: 10%; min-height: 10%;">
+                            <ui:Label tabindex="-1" text="Winners" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="font-size: 50%; width: 70%; max-width: 70%; min-width: 70%;" />
+                            <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddButtonWinners" enable-rich-text="true" class="yellow-button" style="width: 20%; max-width: 20%; min-width: 20%; height: 90%; max-height: 90%; min-height: 90%; margin-top: 5px; font-size: 80%; margin-bottom: 5px; justify-content: flex-start; align-items: center; -unity-background-scale-mode: stretch-to-fill; -unity-text-align: middle-center; padding-top: 4px; padding-right: 0; padding-bottom: 10px; padding-left: 0; margin-right: 5px; margin-left: 5px; white-space: normal; text-overflow: clip; -unity-font-style: bold; flex-direction: column; opacity: 1;" />
+                        </ui:VisualElement>
+                        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" name="WinnersList" style="height: 90%; max-height: 90%; min-height: 90%; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 1; width: 50%; max-width: 50%;">
+                        <ui:VisualElement style="flex-grow: 1; flex-direction: row; height: 10%; max-height: 10%; min-height: 10%;">
+                            <ui:Label tabindex="-1" text="Losers" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="font-size: 50%; width: 70%; max-width: 70%; min-width: 70%;" />
+                            <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddButtonLossers" enable-rich-text="true" class="yellow-button" style="width: 20%; max-width: 20%; min-width: 20%; height: 90%; max-height: 90%; min-height: 90%; margin-top: 5px; font-size: 80%; margin-bottom: 5px; justify-content: flex-start; align-items: center; -unity-background-scale-mode: stretch-to-fill; -unity-text-align: middle-center; padding-top: 4px; padding-right: 0; padding-bottom: 10px; padding-left: 0; margin-right: 5px; margin-left: 5px; white-space: normal; text-overflow: clip; -unity-font-style: bold; flex-direction: column; opacity: 1;" />
+                        </ui:VisualElement>
+                        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="Hidden" name="LosersList" style="height: 90%; max-height: 90%; min-height: 90%; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddButton" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 7%; max-height: 7%; min-height: 7%; margin-top: 50px; font-size: 80%; margin-bottom: 20px;" />
+                <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackButton" class="yellow-button" style="width: 90%; max-width: 90%; min-width: 90%; height: 7%; max-height: 7%; min-height: 7%; margin-top: 40px; font-size: 80%; justify-content: flex-start; margin-bottom: 15px;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

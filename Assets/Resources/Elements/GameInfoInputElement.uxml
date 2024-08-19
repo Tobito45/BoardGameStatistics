@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/main.uss?fileID=7433441132597879392&amp;guid=650e524d0495a1e48982b2cb80a88675&amp;type=3#main" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row; background-color: rgb(91, 91, 91); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; justify-content: space-between; margin-top: 10px; margin-bottom: 10px;">
+        <ui:Button text="x" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DeleteButton" class="white-text" style="min-width: auto; min-height: auto; background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); font-size: 40%;" />
+        <ui:Label tabindex="-1" text="Trapper" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Name" class="white-text" style="font-size: 30%; flex-grow: 1; flex-wrap: nowrap; flex-shrink: 1; white-space: normal;" />
+        <ui:Label tabindex="-1" text="8" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Points" class="white-text" style="font-size: 30%; align-self: auto; align-items: stretch; padding-right: 5px;" />
+    </ui:VisualElement>
+</ui:UXML>

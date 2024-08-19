@@ -59,7 +59,7 @@ namespace UIStateControllers
             if (!Validate(textFieldGames, textFieldWins, textFieldName))
                 return;
 
-            _uIController.GetActualData.AddCharacter(new Character(textFieldName.value, (int)textFieldGames.value, (int)textFieldWins.value));
+            _uIController.GetActualData.AddCharacter(new Character(textFieldName.value));//, (int)textFieldGames.value, (int)textFieldWins.value));
             StateMachine.SetCharactersState();
         }
     }

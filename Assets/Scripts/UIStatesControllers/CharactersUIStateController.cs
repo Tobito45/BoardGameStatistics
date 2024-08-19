@@ -1,4 +1,5 @@
 using Data;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -29,10 +30,14 @@ namespace UIStateControllers
                 foreach (Character character in ActualData.GetCharacters)
                 {
                     VisualElement itemUi = _prefabCharactersElement.Instantiate();
+                    character.CalculateData(ActualData.GetGames.Select(n => n.Winners),
+                               ActualData.GetGames.Select(n => n.Losers).ToList());
+
                     itemUi.Q<Label>("Name").text = character.Name;
                     itemUi.Q<Label>("Games").text = character.Games.ToString();
                     itemUi.Q<Label>("Wins").text = character.Wins.ToString();
                     itemUi.Q<Label>("Percents").text = character.Percent.ToString("F1");
+                    itemUi.Q<Label>("Points").text = character.AveragePoints.ToString("F1");
                     itemUi.Q<Button>("AddButton").clicked += () =>
                     {
                         _uIController.ActualCharater = character;

@@ -9,7 +9,8 @@ namespace UIStateControllers
 {
     public class GamesInfoUIStateController : UIStateControllerBase
     {
-        VisualTreeAsset _prefabGamesElement, _prefabPlusElement;
+        private VisualTreeAsset _prefabGamesElement, _prefabPlusElement;
+        private VisualTreeAsset _prefabCharacter;
 
         public GamesInfoUIStateController(UIController uIController) : base(uIController) { }
 
@@ -18,6 +19,8 @@ namespace UIStateControllers
             visualElement.Q<Button>("BackButton").clicked += () => StateMachine.SetActionsState();
             _prefabGamesElement = Resources.Load<VisualTreeAsset>("Elements/GamesInfoElement");
             _prefabPlusElement = Resources.Load<VisualTreeAsset>("Elements/PlusElement");
+            _prefabCharacter = Resources.Load<VisualTreeAsset>("Elements/GameInfoInputElement");
+
         }
         public override void Clear(VisualElement visualElement) { }
 
@@ -38,11 +41,30 @@ namespace UIStateControllers
                     itemUi.Q<Label>("Players").text = games[i].Players.ToString();
                     itemUi.Q<Label>("Time").text = games[i].Time.ToString("F1") + " min";
                     itemUi.Q<Label>("Text").text = games[i].Comment;
+                    if (games[i].Winners.Count == 0 && games[i].Losers.Count == 0) 
+                        itemUi.Q<VisualElement>("Characters").style.display = DisplayStyle.None;
+                    else
+                    {
+                        CreateList(games[i].Winners, itemUi.Q<ScrollView>("Winners"));
+                        CreateList(games[i].Losers, itemUi.Q<ScrollView>("Losers"));
+                    }
                     listView.Add(itemUi);
                 }
                 VisualElement plus = _prefabPlusElement.Instantiate();
                 listView.Add(plus);
                 plus.Q<Button>("Add").clicked += () => StateMachine.SetGamesInfoInputState();
+            }
+        }
+
+        private void CreateList(List<(Character character, int point)> list, ScrollView scrollView)
+        {
+            foreach ((Character character, int point) in list)
+            {
+                VisualElement element = _prefabCharacter.Instantiate();
+                element.Q<Button>("DeleteButton").text = string.Empty;
+                element.Q<Label>("Name").text = character.Name;
+                element.Q<Label>("Points").text = point.ToString();
+                scrollView.Add(element);
             }
         }
     }

@@ -2,6 +2,6 @@
     <Style src="project://database/Assets/Resources/main.uss?fileID=7433441132597879392&amp;guid=650e524d0495a1e48982b2cb80a88675&amp;type=3#main" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgb(0, 0, 0); align-self: center; justify-content: center;">
         <ui:Label tabindex="-1" text="Board Game Statistics" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="height: 30%; max-height: 30%; min-height: 30%; font-size: 150%; flex-wrap: nowrap; white-space: normal; align-self: auto; align-items: auto; rotate: -24deg; -unity-font-style: bold-and-italic;" />
-        <ui:Label tabindex="-1" text="version: 0.3" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Version" class="white-text" style="justify-content: center; align-self: center; -unity-text-align: middle-center; font-size: 80%; position: absolute; bottom: auto; top: 90%; color: rgba(255, 255, 255, 0.36);" />
+        <ui:Label tabindex="-1" text="version: 0.4" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Version" class="white-text" style="justify-content: center; align-self: center; -unity-text-align: middle-center; font-size: 80%; position: absolute; bottom: auto; top: 90%; color: rgba(255, 255, 255, 0.36);" />
     </ui:VisualElement>
 </ui:UXML>

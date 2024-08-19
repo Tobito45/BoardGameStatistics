@@ -55,9 +55,14 @@ public class GameDataFactory
         {
             return null;
         }
-
         string json = PlayerPrefs.GetString("PlayerData", "{}");
         List<GameData> data = JsonConvert.DeserializeObject<List<GameData>>(json);
+        string version = PlayerPrefs.GetString("Version");
+        if(version != Application.version)
+        {
+            MigrationController.Migration(version,ref data);
+        }
+
         return data;
     }
 
@@ -86,8 +91,8 @@ public class GameDataFactory
 
     private void CreateCharacters()
     {
-        data[0].AddCharacter(new Character("Охотник", 0, 0), new Character("Деревенщина", 0, 0), new Character("Медсестра", 0, 0),
-           new Character("Доктор", 0, 0), new Character("Ведьма", 0, 0), new Character("Призрак", 0, 0));
+        data[0].AddCharacter(new Character("Охотник"), new Character("Деревенщина"), new Character("Медсестра"),
+           new Character("Доктор"), new Character("Ведьма"), new Character("Призрак"));
     }
 
     public IEnumerable<GameData> GetData() => data;
