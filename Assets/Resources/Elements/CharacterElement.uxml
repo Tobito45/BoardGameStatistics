@@ -10,7 +10,7 @@
                 <ui:VisualElement name="Demon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Images/evil_icon.png?fileID=2800000&amp;guid=f4a345be350e7774ba4f412855cdbf08&amp;type=3#evil_icon&apos;); background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(0, 0, 0); -unity-background-scale-mode: scale-to-fit; width: 20%; height: 100%; max-height: 100%; max-width: 20%; min-height: 100%; min-width: 20%;" />
                 <ui:Label text="Trapper" name="Name" class="white-text" style="margin-top: 30px; width: auto; height: auto; margin-right: 0; margin-bottom: 30px; margin-left: 15px; font-size: 60px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: middle-left; text-overflow: clip; white-space: normal; align-items: flex-start; max-width: 78%; min-width: auto; max-height: none; min-height: auto; flex-grow: 1;" />
             </ui:VisualElement>
-            <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; padding-top: 10px; padding-bottom: 10px;">
+            <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; padding-top: 10px; padding-bottom: 10px; padding-right: 10px; padding-left: 10px;">
                 <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; width: 25%; max-width: 25%; min-width: 25%;">
                     <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Images/cube_icon.png?fileID=2800000&amp;guid=bb517815b06d16046b076e72e461e8e0&amp;type=3#cube_icon&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(0, 0, 0); width: 40%; min-width: 40%; max-width: 40%;" />
                     <ui:Label tabindex="-1" text="120" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Games" class="white-text" style="font-size: 60%;" />
@@ -20,7 +20,7 @@
                     <ui:Label tabindex="-1" text="120" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Wins" class="white-text" style="font-size: 60%;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; width: 25%; max-width: 25%; min-width: 25%;">
-                    <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Images/2527997_achievement_award_cup_prize_trophy_icon.png?fileID=2800000&amp;guid=efab686ef4d05004ca3d10dfc3ffee26&amp;type=3#2527997_achievement_award_cup_prize_trophy_icon&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(0, 0, 0); width: 40%; min-width: 40%; max-width: 40%;" />
+                    <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Images/trophy_icon.png?fileID=2800000&amp;guid=efab686ef4d05004ca3d10dfc3ffee26&amp;type=3#trophy_icon&apos;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgb(0, 0, 0); width: 40%; min-width: 40%; max-width: 40%;" />
                     <ui:Label tabindex="-1" text="100.0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Points" class="white-text" style="font-size: 50%;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; width: 25%; max-width: 25%; min-width: 25%;">

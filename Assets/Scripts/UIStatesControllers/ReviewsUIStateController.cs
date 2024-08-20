@@ -34,6 +34,11 @@ namespace UIStateControllers
                     itemUi.Q<Label>("Name").text = review.Name;
                     itemUi.Q<Label>("Text").text = review.Text;
                     itemUi.Q<Label>("Mark").text = review.Mark.ToString("F1");
+                    itemUi.Q<Button>("DeleteButton").clicked += () =>
+                    {
+                        ActualData.RemoveReview(review);
+                        listView.Remove(itemUi);
+                    };
                     listView.Add(itemUi);
                 }
                 VisualElement plus = _prefabPlusElement.Instantiate();

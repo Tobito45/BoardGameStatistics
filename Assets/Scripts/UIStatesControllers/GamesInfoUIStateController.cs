@@ -41,6 +41,12 @@ namespace UIStateControllers
                     itemUi.Q<Label>("Players").text = games[i].Players.ToString();
                     itemUi.Q<Label>("Time").text = games[i].Time.ToString("F1") + " min";
                     itemUi.Q<Label>("Text").text = games[i].Comment;
+                    int save = i;
+                    itemUi.Q<Button>("DeleteButton").clicked += () =>
+                    {
+                        ActualData.RemoveGame(games[save]);
+                        listView.Remove(itemUi);
+                    };
                     if (games[i].Winners.Count == 0 && games[i].Losers.Count == 0) 
                         itemUi.Q<VisualElement>("Characters").style.display = DisplayStyle.None;
                     else

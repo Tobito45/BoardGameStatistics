@@ -38,6 +38,7 @@ namespace UIStateControllers
                     itemUi.Q<Label>("Wins").text = character.Wins.ToString();
                     itemUi.Q<Label>("Percents").text = character.Percent.ToString("F1");
                     itemUi.Q<Label>("Points").text = character.AveragePoints.ToString("F1");
+
                     itemUi.Q<Button>("AddButton").clicked += () =>
                     {
                         _uIController.ActualCharater = character;

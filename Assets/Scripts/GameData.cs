@@ -46,6 +46,8 @@ namespace Data
         public IEnumerable<Character> GetCharacters => _characters;
         public IEnumerable<string> GetUrls => _urls;
         public void RemoveUrl(string str) => _urls.Remove(str);
+        public void RemoveGame(Game game) => _games.Remove(game);
+        public void RemoveReview(Review review) => _reviews.Remove(review);
         public bool ContainsUrl(string str) => _urls.Contains(str); //mb slow
         public void SetNewListUrl(List<string> strs)
         {
