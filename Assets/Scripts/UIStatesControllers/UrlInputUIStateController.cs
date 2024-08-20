@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -44,8 +43,8 @@ namespace UIStateControllers
             VisualElement itemUi = _prefabUrlElement.Instantiate();
             TextField textField = itemUi.Q<TextField>("NameInput");
             textField.value = str;
-            textField.RegisterCallback<ChangeEvent<string>>(evt => _uIController.LoadImageAsync(itemUi.Q<VisualElement>("Image"), evt.newValue));
-            _uIController.LoadImageAsync(itemUi.Q<VisualElement>("Image"), str);
+            textField.RegisterCallback<ChangeEvent<string>>(evt => _uIController.LoadImage(itemUi.Q<VisualElement>("Image"), evt.newValue));
+            _uIController.LoadImage(itemUi.Q<VisualElement>("Image"), str);
 
             itemUi.Q<Button>("DeleteButton").clicked += () =>
             {
@@ -55,8 +54,13 @@ namespace UIStateControllers
             if (str != string.Empty)
                 list.Add(itemUi);
             else
+            {
                 list.Insert(list.childCount - 1, itemUi);
+                _uIController.PickImage(itemUi.Q<VisualElement>("Image"), ref str, textField);
+            }
         }
+
+        
         private void SaveNewUrlList(ScrollView list)
         {
             List<string> newUrls = new List<string>();

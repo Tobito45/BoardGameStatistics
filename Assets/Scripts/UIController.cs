@@ -2,7 +2,9 @@ using Data;
 using States;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UIStateControllers;
 using UnityEngine;
@@ -90,6 +92,42 @@ public class UIController
             else
                 return DownloadHandlerTexture.GetContent(www);
         }
+    }
+    public void PickImage(VisualElement image, ref string pathImage, TextField textField)
+    {
+        string pathsave = string.Empty;
+        NativeGallery.Permission permission = NativeGallery.GetImageFromGallery((path) =>
+        {
+            if (path != null)
+            {
+                LoadImageFromLocalStorage(image, path);
+                textField.value = path;
+                pathsave = path;
+            } else
+            {
+                image.style.backgroundImage = _errorSprite;
+            }
+        });
+        pathImage = pathsave;
+    }
+    private void LoadImageFromLocalStorage(VisualElement image, string path)
+    {
+        Texture2D texture = NativeGallery.LoadImageAtPath(path);
+        if (texture == null)
+        {
+            image.style.backgroundImage = _errorSprite;
+            return;
+        }
+        image.style.backgroundImage = texture;
+    }
+
+    public void LoadImage(VisualElement image, string path)
+    {
+        string urlPattern = @"^(http|https|ftp)://";
+        if  (path.StartsWith("http://") || path.StartsWith("https://"))//(Regex.IsMatch(path, urlPattern)) 
+            LoadImageAsync(image, path);
+        else
+            LoadImageFromLocalStorage(image, path);
     }
 
     public void SetInputFieldColor(VisualElement textField, Color color, int boardSize)

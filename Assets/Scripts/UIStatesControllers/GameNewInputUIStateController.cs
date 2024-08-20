@@ -64,7 +64,9 @@ namespace UIStateControllers
             if (!Validate(textFieldName, textFieldUrl, textFieldName))
                 return;
 
-            _gameDataFactory.AddBoardGame(new GameData(textFieldName.value, textFieldUrl.value, textFieldText.value));
+            GameData gameData = new GameData(textFieldName.value, textFieldUrl.value, textFieldText.value);
+            gameData.AddUrl(GameDataFactory.URL_LOADING);
+            _gameDataFactory.AddBoardGame(gameData);
             StateMachine.SetMainState();
         }
     }

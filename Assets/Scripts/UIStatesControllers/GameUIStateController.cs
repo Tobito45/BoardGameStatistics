@@ -23,12 +23,12 @@ namespace UIStateControllers
             });
             visualElement.Q<Button>("RightButton").clicked += () =>
             {
-                _uIController.LoadImageAsync(image, ActualData.MoveNextPicture());
+                _uIController.LoadImage(image, ActualData.MoveNextPicture());
                 visualElement.Q<Label>("CountPictures").text = $"{ActualData.Index + 1}/{ActualData.GetUrls.Count()}";
             };
             visualElement.Q<Button>("LeftButton").clicked += () =>
             {
-                _uIController.LoadImageAsync(image, ActualData.MovePreviusPicture());
+                _uIController.LoadImage(image, ActualData.MovePreviusPicture());
                 visualElement.Q<Label>("CountPictures").text = $"{ActualData.Index + 1}/{ActualData.GetUrls.Count()}";
             };
         }
@@ -37,7 +37,7 @@ namespace UIStateControllers
 
         public override void Update(VisualElement visualElement)
         {
-            _uIController.LoadImageAsync(visualElement.Q<VisualElement>("ImagesList"), ActualData.GetCurrent());
+            _uIController.LoadImage(visualElement.Q<VisualElement>("ImagesList"), ActualData.GetCurrent());
             visualElement.Q<Label>("CountPictures").text = $"{ActualData.Index + 1}/{ActualData.GetUrls.Count()}";
             visualElement.Q<Label>("Name").text = ActualData.Name;
             visualElement.Q<Label>("GameLength").text = $"{(ActualData.Time == -1 ? '-' : ActualData.Time.ToString("F1"))} min";
