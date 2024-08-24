@@ -25,7 +25,8 @@ namespace States
         private readonly UrlInputState _urlInput;
         private readonly GamesCharacterInputState _gamesCharacterInputState;
         private readonly ImportInputState _importInputState;
-        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState, GameNewInputState gameNewInputState, StartScreenState startScreenState, UrlInputState urlInput, GamesCharacterInputState gamesCharacterInputState, ImportInputState importInputState)
+        private readonly ErrorScreenState _errorScreenState;
+        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState, GameNewInputState gameNewInputState, StartScreenState startScreenState, UrlInputState urlInput, GamesCharacterInputState gamesCharacterInputState, ImportInputState importInputState, ErrorScreenState errorScreenState)
         {
             _mainState = mainState;
             _gameState = gameState;
@@ -42,6 +43,7 @@ namespace States
             _urlInput = urlInput;
             _gamesCharacterInputState = gamesCharacterInputState;
             _importInputState = importInputState;
+            _errorScreenState = errorScreenState;
 
             Intialize(_mainState);
         }
@@ -51,7 +53,7 @@ namespace States
             ActualState.Entry();
         }
 
-        private void TransitionTo(IState newState)
+        public void TransitionTo(IState newState)
         {
             ActualState.Exit();
             ActualState = newState;
@@ -73,5 +75,6 @@ namespace States
         public void SetUrlInputState() => TransitionTo(_urlInput);
         public void SetGamesCharacterInputState() => TransitionTo(_gamesCharacterInputState);
         public void SetImportInputState() => TransitionTo(_importInputState);
+        public void SetErrorState() => TransitionTo(_errorScreenState);
     }
 }

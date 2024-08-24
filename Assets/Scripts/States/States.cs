@@ -152,5 +152,9 @@ namespace States
             base.Entry();
         }
     }
+    public class ErrorScreenState : BaseState, IState
+    {
+        public ErrorScreenState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController) { }
+    }
 }
 

@@ -9,7 +9,7 @@ public class SceneInstaller : MonoInstaller
 {
     [SerializeField]
     private UIDocument _main, _game, _actions, _reviews, _reviewsInput, _gamesInput, _characterNewInput, _characterChangeInput,
-        _gameNewInput, _startState, _urlInput, _gamesCharacterInput, _importInput;
+        _gameNewInput, _startState, _urlInput, _gamesCharacterInput, _importInput, _error;
 
     [SerializeField]
     private SceneContext _sceneContext;
@@ -37,6 +37,7 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<UrlInputState>().AsSingle().WithArguments(_urlInput.rootVisualElement);
         Container.Bind<GamesCharacterInputState>().AsSingle().WithArguments(_gamesCharacterInput.rootVisualElement);
         Container.Bind<ImportInputState>().AsSingle().WithArguments(_importInput.rootVisualElement);
+        Container.Bind<ErrorScreenState>().AsSingle().WithArguments(_error.rootVisualElement);
         Container.Bind<StateMachine>().AsSingle().NonLazy();
     }
 

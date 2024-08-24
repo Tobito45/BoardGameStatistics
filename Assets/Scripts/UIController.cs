@@ -24,6 +24,7 @@ public class UIController
     public  List<GameData> ImportedData { get; set; } //dangeres
     public Game ActualGame { get; set; }
 
+    public (string message, IState previousState) ErrorInfo { get; private set; }
     private Dictionary<Type, IUIState> _statesControllers;
 
     [Inject]
@@ -55,6 +56,7 @@ public class UIController
             {typeof(UrlInputState), new UrlInputUIStateController(this) },
             {typeof(GamesCharacterInputState), new GamesCharacterInputUIStateController(this) },
             {typeof(ImportInputState), new ImportInputStateControllers(this, _gameDataFactory) },
+            {typeof(ErrorScreenState), new ErrorUIStateController(this) },
         };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;
@@ -140,8 +142,8 @@ public class UIController
     public void Export()
     {
         _gameDataFactory.SaveData();
-        ShareController.ExportData("data.txt");
-        ShareController.ShareGeneratedFile("data.txt");
+        ShareController.ExportData("board_games.dt");
+        ShareController.ShareGeneratedFile("board_games.dt");
     }
 
     public void Import()
@@ -157,12 +159,13 @@ public class UIController
             catch
             {
                 Debug.LogError("IDI NAXUI");
+                SetErrorData("Cannot properly readed import data. Check file format");
+                StateMachine.SetErrorState();
             }
         });
-
-        
     }
 
+    public void SetErrorData(string message) => ErrorInfo = (message, StateMachine.ActualState);
     public void SetInputFieldColor(VisualElement textField, Color color, int boardSize)
     {
         textField.style.borderBottomColor = color;
