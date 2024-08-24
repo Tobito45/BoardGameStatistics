@@ -41,6 +41,7 @@ namespace Data
         public void AddGame(params Game[] games) => _games.AddRange(games);
         public void AddCharacter(params Character[] characters) => _characters.AddRange(characters);
         public void AddUrl(params string[] urls) => _urls.AddRange(urls);
+
         public IEnumerable<Review> GetReviews => _reviews;
         public IEnumerable<Game> GetGames => _games;
         public IEnumerable<Character> GetCharacters => _characters;
@@ -67,6 +68,18 @@ namespace Data
             Index--;
             if (Index < 0) Index = _urls.Count - 1;
             return GetCurrent();
+        }
+        public void AddUrlNotLast(string url)
+        {
+            int count = _urls.Count;
+            if (count == 0)
+            {
+                _urls.Add(url);
+            }
+            else
+            {
+                _urls.Insert(count - 1, url);
+            }
         }
         public float Mark => SumMarkReview / PlayersReview;
         public float Time => _games.Count == 0 ? -1 : (float)CountMinutes / Games;

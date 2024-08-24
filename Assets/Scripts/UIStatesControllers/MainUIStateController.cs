@@ -1,6 +1,4 @@
 using Data;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,17 +7,20 @@ namespace UIStateControllers
     public class MainUIStateController : UIStateControllerBase
     {
         private readonly GameDataFactory _gameDataFactory;
-        private VisualTreeAsset _prefabMainElement, _prefabPlusElement;
+        private VisualTreeAsset _prefabMainElement, _prefabPlusElement, _prefabImportExport;
 
         public MainUIStateController(UIController uIController, GameDataFactory gameDataFactory) : base(uIController)
         {
             _gameDataFactory = gameDataFactory;
+            // GettingFile();
+
         }
 
         public override void Installization(VisualElement visualElement)
         {
             _prefabMainElement = Resources.Load<VisualTreeAsset>("Elements/MainElement");
             _prefabPlusElement = Resources.Load<VisualTreeAsset>("Elements/PlusElement");
+            _prefabImportExport = Resources.Load<VisualTreeAsset>("Elements/ImportExportElement");
         }
 
         public override void Clear(VisualElement visualElement) { }
@@ -48,7 +49,14 @@ namespace UIStateControllers
             plus.Q<Button>("Add").clicked += () =>
             {
                 StateMachine.SetGameNewInputState();
+                //Testic();
+                //ShareGeneratedFile();
+                // GettingFile();
             };
+            VisualElement impExp = _prefabImportExport.Instantiate();
+            listView.Add(impExp);
+            impExp.Q<Button>("Export").clicked += () => _uIController.Export();
+            impExp.Q<Button>("Import").clicked += () => _uIController.Import();
         }
     }
 }

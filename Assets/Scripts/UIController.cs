@@ -1,4 +1,5 @@
 using Data;
+using Newtonsoft.Json;
 using States;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ public class UIController
 
     public StateMachine StateMachine { get; private set; }
     public  Character ActualCharater { get; set; }
+    public  List<GameData> ImportedData { get; set; } //dangeres
     public Game ActualGame { get; set; }
 
     private Dictionary<Type, IUIState> _statesControllers;
@@ -52,6 +54,7 @@ public class UIController
             {typeof(StartScreenState), new StartScreenStateController(this) },
             {typeof(UrlInputState), new UrlInputUIStateController(this) },
             {typeof(GamesCharacterInputState), new GamesCharacterInputUIStateController(this) },
+            {typeof(ImportInputState), new ImportInputStateControllers(this, _gameDataFactory) },
         };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;
@@ -123,11 +126,41 @@ public class UIController
 
     public void LoadImage(VisualElement image, string path)
     {
-        string urlPattern = @"^(http|https|ftp)://";
-        if  (path.StartsWith("http://") || path.StartsWith("https://"))//(Regex.IsMatch(path, urlPattern)) 
+        if  (IsLink(path))//(Regex.IsMatch(path, urlPattern)) 
             LoadImageAsync(image, path);
         else
             LoadImageFromLocalStorage(image, path);
+    }
+
+    public bool IsLink(string link)
+    {
+        string urlPattern = @"^(http|https|ftp)://";
+        return link.StartsWith("http://") || link.StartsWith("https://");
+    }
+    public void Export()
+    {
+        _gameDataFactory.SaveData();
+        ShareController.ExportData("data.txt");
+        ShareController.ShareGeneratedFile("data.txt");
+    }
+
+    public void Import()
+    {
+        ShareController.PickFile((content) =>
+        {
+            try
+            {
+                List<GameData> data = JsonConvert.DeserializeObject<List<GameData>>(content);
+                ImportedData = data;
+                StateMachine.SetImportInputState();
+            }
+            catch
+            {
+                Debug.LogError("IDI NAXUI");
+            }
+        });
+
+        
     }
 
     public void SetInputFieldColor(VisualElement textField, Color color, int boardSize)

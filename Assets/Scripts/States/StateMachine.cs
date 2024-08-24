@@ -24,7 +24,8 @@ namespace States
         private readonly StartScreenState _startScreenState;
         private readonly UrlInputState _urlInput;
         private readonly GamesCharacterInputState _gamesCharacterInputState;
-        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState, GameNewInputState gameNewInputState, StartScreenState startScreenState, UrlInputState urlInput, GamesCharacterInputState gamesCharacterInputState)
+        private readonly ImportInputState _importInputState;
+        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState, GameNewInputState gameNewInputState, StartScreenState startScreenState, UrlInputState urlInput, GamesCharacterInputState gamesCharacterInputState, ImportInputState importInputState)
         {
             _mainState = mainState;
             _gameState = gameState;
@@ -40,6 +41,7 @@ namespace States
             _startScreenState = startScreenState;
             _urlInput = urlInput;
             _gamesCharacterInputState = gamesCharacterInputState;
+            _importInputState = importInputState;
 
             Intialize(_mainState);
         }
@@ -70,5 +72,6 @@ namespace States
         public void SetStartScreenState() => TransitionTo(_startScreenState);
         public void SetUrlInputState() => TransitionTo(_urlInput);
         public void SetGamesCharacterInputState() => TransitionTo(_gamesCharacterInputState);
+        public void SetImportInputState() => TransitionTo(_importInputState);
     }
 }

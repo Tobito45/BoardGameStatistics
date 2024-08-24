@@ -11,7 +11,7 @@ public class GameDataFactory
 
     public GameDataFactory()
     {
-        //PlayerPrefs.DeleteKey("PlayerData");
+        PlayerPrefs.DeleteKey("PlayerData");
 
         data = LoadPlayerData();
         if (data != null)

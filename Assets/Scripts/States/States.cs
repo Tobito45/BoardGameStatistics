@@ -138,5 +138,19 @@ namespace States
             base.Entry();
         }
     }
+    public class ImportInputState : BaseState, IState
+    {
+        private readonly MainState _mainState;
+
+        public ImportInputState(VisualElement visualElement, MainState mainState, UIController uIController) : base(visualElement, uIController)
+        {
+            _mainState = mainState;
+        }
+        public override void Entry()
+        {
+            _mainState.VisualElement.style.display = DisplayStyle.Flex;
+            base.Entry();
+        }
+    }
 }
 

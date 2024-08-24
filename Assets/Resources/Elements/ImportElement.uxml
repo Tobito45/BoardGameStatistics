@@ -1,0 +1,31 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/main.uss?fileID=7433441132597879392&amp;guid=650e524d0495a1e48982b2cb80a88675&amp;type=3#main" />
+    <ui:VisualElement name="ImportElement" style="flex-grow: 1; width: 800px; align-self: center; flex-direction: row; background-color: rgb(91, 91, 91); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; margin-top: 10px; margin-bottom: 10px;">
+        <ui:VisualElement name="Image" style="flex-grow: 1; min-width: 35%; min-height: auto; background-image: resource(&apos;Pictures/loading&apos;); width: 35%; max-width: 35%; -unity-background-scale-mode: scale-to-fit; margin-right: 10px;" />
+        <ui:VisualElement style="flex-grow: 1; min-width: auto; min-height: auto;">
+            <ui:Label tabindex="-1" text="Dead by DayLight" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Name" class="white-text" style="min-width: auto; min-height: auto; font-size: 60%; flex-grow: 1; flex-shrink: 1; white-space: normal;" />
+            <ui:VisualElement style="flex-grow: 1;">
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Reviews:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; font-size: 40%; min-width: auto; min-height: auto;" />
+                    <ui:Toggle name="ReviewsToggle" style="display: flex;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Games:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; font-size: 40%; min-width: auto; min-height: auto;" />
+                    <ui:Toggle name="GamesToggle" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Charaters:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; font-size: 40%; min-width: auto; min-height: auto;" />
+                    <ui:Toggle name="CharacterToggle" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Url Images:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; font-size: 40%; min-width: auto; min-height: auto;" />
+                    <ui:Toggle name="UrlToggle" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Add only board game:" parse-escape-sequences="true" display-tooltip-when-elided="true" class="white-text" style="-unity-text-align: middle-left; font-size: 40%; min-width: auto; min-height: auto;" />
+                    <ui:Toggle name="AddOnlyToggle" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
