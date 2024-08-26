@@ -17,18 +17,22 @@ namespace UIStateControllers
             visualElement.Q<Button>("BackButton").clicked += () =>
             {
                 StateMachine.SetGamesInfoState();
-                _uIController.ActualGame = null;
+                _uIController.ActualGame = (null, false);
             };
-            visualElement.Q<Button>("AddButton").clicked += () => SaveNewGame(visualElement);
+            visualElement.Q<Button>("AddButton").clicked += () =>
+            {
+                SaveNewGame(visualElement);
+                _uIController.ActualGame = (null, false);
+            };
             visualElement.Q<Button>("AddButtonWinners").clicked += () =>
             {
                 StateMachine.SetGamesCharacterInputState();
-                _uIController.ActualGame.isLoser = false;
+                _uIController.ActualGame.game.isLoser = false;
             };
             visualElement.Q<Button>("AddButtonLossers").clicked += () =>
             {
                 StateMachine.SetGamesCharacterInputState();
-                _uIController.ActualGame.isLoser = true;
+                _uIController.ActualGame.game.isLoser = true;
             };
         }
         public override void Clear(VisualElement visualElement) { }
@@ -37,12 +41,18 @@ namespace UIStateControllers
         {
             UnsignedIntegerField textFieldPlayers = visualElement.Q<UnsignedIntegerField>("PlayersInput");
             UnsignedIntegerField textFieldTime = visualElement.Q<UnsignedIntegerField>("TimeInput");
-            if (_uIController.ActualGame == null)
+            if (_uIController.ActualGame.game == null)
             {
-                _uIController.ActualGame = new Game();
+                _uIController.ActualGame = (new Game(), false);
                 textFieldPlayers.value = textFieldTime.value = 0;
                 visualElement.Q<TextField>("TextInput").value = string.Empty;
-            } 
+            }
+            else
+            {
+                textFieldPlayers.value = (uint)_uIController.ActualGame.game.Players;
+                textFieldTime.value = (uint)_uIController.ActualGame.game.Time;
+                visualElement.Q<TextField>("TextInput").value = _uIController.ActualGame.game.Comment;
+            }
 
             _uIController.SetInputFieldColor(textFieldPlayers, Color.white, 0);
             _uIController.SetInputFieldColor(textFieldTime, Color.white, 0);
@@ -50,8 +60,8 @@ namespace UIStateControllers
             ScrollView lossers = visualElement.Q<ScrollView>("LosersList");
             winners.Clear();
             lossers.Clear();
-            CreateList(winners, _uIController.ActualGame.Winners);
-            CreateList(lossers, _uIController.ActualGame.Losers);
+            CreateList(winners, _uIController.ActualGame.game.Winners);
+            CreateList(lossers, _uIController.ActualGame.game.Losers);
         }
 
         private void CreateList(ScrollView scrollView, List<(Character, int)> list)
@@ -94,11 +104,11 @@ namespace UIStateControllers
             if (!Validate(textFieldPlayers, textFieldTime))
                 return;
 
-            _uIController.ActualGame.Time = (int)textFieldTime.value;
-            _uIController.ActualGame.Players = (int)textFieldPlayers.value;
-            _uIController.ActualGame.Comment = visualElement.Q<TextField>("TextInput").value;
-            _uIController.GetActualData.AddGame(_uIController.ActualGame);
-            _uIController.ActualGame = null;
+            _uIController.ActualGame.game.Time = (int)textFieldTime.value;
+            _uIController.ActualGame.game.Players = (int)textFieldPlayers.value;
+            _uIController.ActualGame.game.Comment = visualElement.Q<TextField>("TextInput").value;
+            if(!_uIController.ActualGame.isEdit)
+                _uIController.GetActualData.AddGame(_uIController.ActualGame.game);
             StateMachine.SetGamesInfoState();
         }
     }

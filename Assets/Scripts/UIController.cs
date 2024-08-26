@@ -22,8 +22,8 @@ public class UIController
     public StateMachine StateMachine { get; private set; }
     public  Character ActualCharater { get; set; }
     public  List<GameData> ImportedData { get; set; } //dangeres
-    public Game ActualGame { get; set; }
-
+    public (Game game, bool isEdit) ActualGame { get; set; }
+    public Review ActualReview { get; set; }
     public (string message, IState previousState) ErrorInfo { get; private set; }
     private Dictionary<Type, IUIState> _statesControllers;
 
@@ -150,19 +150,24 @@ public class UIController
     {
         ShareController.PickFile((content) =>
         {
-            try
-            {
-                List<GameData> data = JsonConvert.DeserializeObject<List<GameData>>(content);
-                ImportedData = data;
-                StateMachine.SetImportInputState();
-            }
-            catch
-            {
-                Debug.LogError("IDI NAXUI");
-                SetErrorData("Cannot properly readed import data. Check file format");
-                StateMachine.SetErrorState();
-            }
+            TryToImportJson(content);
         });
+    }
+
+    public void TryToImportJson(string content)
+    {
+        try
+        {
+            List<GameData> data = JsonConvert.DeserializeObject<List<GameData>>(content);
+            ImportedData = data;
+            StateMachine.SetImportInputState();
+        }
+        catch
+        {
+            Debug.LogError("IDI NAXUI");
+            SetErrorData("Cannot properly readed import data. Check file format");
+            StateMachine.SetErrorState();
+        }
     }
 
     public void SetErrorData(string message) => ErrorInfo = (message, StateMachine.ActualState);

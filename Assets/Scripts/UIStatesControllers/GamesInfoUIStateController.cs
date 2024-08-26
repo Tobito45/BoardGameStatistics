@@ -47,6 +47,11 @@ namespace UIStateControllers
                         ActualData.RemoveGame(games[save]);
                         listView.Remove(itemUi);
                     };
+                    itemUi.Q<Button>("EditButton").clicked += () =>
+                    {
+                        _uIController.ActualGame = (games[save], true);
+                        StateMachine.SetGamesInfoInputState();
+                    };
                     if (games[i].Winners.Count == 0 && games[i].Losers.Count == 0) 
                         itemUi.Q<VisualElement>("Characters").style.display = DisplayStyle.None;
                     else

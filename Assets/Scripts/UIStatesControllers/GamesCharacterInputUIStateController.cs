@@ -51,7 +51,7 @@ namespace UIStateControllers
         private void SaveNewGame(VisualElement visualElement, ListView listView)
         {
             if (!Validate(listView)) return;
-            _uIController.ActualGame.AddNewCharacter(listView.selectedItem as Character, visualElement.Q<IntegerField>("PointsInput").value);
+            _uIController.ActualGame.game.AddNewCharacter(listView.selectedItem as Character, visualElement.Q<IntegerField>("PointsInput").value);
             StateMachine.SetGamesInfoInputState();
         }
     }

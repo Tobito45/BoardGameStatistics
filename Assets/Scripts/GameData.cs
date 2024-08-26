@@ -87,9 +87,9 @@ namespace Data
 
     public class Review
     {
-        public string Name { get; private set; }
-        public float Mark { get; private set; }
-        public string Text { get; private set; }
+        public string Name { get; set; }
+        public float Mark { get; set; }
+        public string Text { get; set; }
 
         public Review(string name, float mark, string text)
         {

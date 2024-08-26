@@ -1,4 +1,4 @@
-using Data;
+    using Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,6 +38,11 @@ namespace UIStateControllers
                     {
                         ActualData.RemoveReview(review);
                         listView.Remove(itemUi);
+                    };
+                    itemUi.Q<Button>("EditButton").clicked += () =>
+                    {
+                        _uIController.ActualReview = review;
+                        StateMachine.SetReviewsInputState();
                     };
                     listView.Add(itemUi);
                 }

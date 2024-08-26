@@ -2,9 +2,18 @@ using System.IO;
 using UnityEngine;
 using NativeFilePickerNamespace;
 using System;
+using Zenject;
 
 public class ShareController : MonoBehaviour
 {
+    private UIController _uiController;
+
+    [Inject]
+    public void Contruct(UIController uIController)
+    {
+        _uiController = uIController;
+    }
+
     private void Start()
     {
         GettingFile();       
@@ -31,19 +40,16 @@ public class ShareController : MonoBehaviour
                     // Вывод пути файла в Unity
                     Debug.Log("Received file path: " + path);
 
-                    // Здесь можно добавить обработку файла
                     string content = System.IO.File.ReadAllText(path);
                     Debug.Log("File content: " + content);
+                    _uiController.TryToImportJson(content);
                 }
             }
         }
     }
 
-  string GetPathFromUri(AndroidJavaObject uri)
+    string GetPathFromUri(AndroidJavaObject uri)
     {
-        // Здесь должна быть логика для преобразования URI в путь к файлу
-        // Это может зависеть от версии Android и способа, которым был получен файл
-        // Используйте ContentResolver и другие методы Android для этого
         return uri.Call<string>("getPath");
     }
 
