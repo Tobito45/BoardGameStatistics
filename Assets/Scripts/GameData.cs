@@ -49,6 +49,7 @@ namespace Data
         public void RemoveUrl(string str) => _urls.Remove(str);
         public void RemoveGame(Game game) => _games.Remove(game);
         public void RemoveReview(Review review) => _reviews.Remove(review);
+        public void RemoveCharacter(Character character) => _characters.Remove(character);
         public bool ContainsUrl(string str) => _urls.Contains(str); //mb slow
         public void SetNewListUrl(List<string> strs)
         {
@@ -136,7 +137,7 @@ namespace Data
 
     public class Character
     {
-        public string Name { get; private set; }
+        public string Name { get; set; }
         public int Games { get; private set; }
         public int Wins { get; private set; }
         public int Points { get; private set; }

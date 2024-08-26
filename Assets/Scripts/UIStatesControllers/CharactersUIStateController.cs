@@ -44,6 +44,16 @@ namespace UIStateControllers
                         _uIController.ActualCharater = character;
                         StateMachine.SetCharacterChangeInputState();
                     };
+                    itemUi.Q<Button>("EditButton").clicked += () =>
+                    {
+                        _uIController.ActualCharater = character;
+                        StateMachine.SetCharacterNewInputState();
+                    };
+                    itemUi.Q<Button>("DeleteButton").clicked += () =>
+                    {
+                        ActualData.RemoveCharacter(character);
+                        listView.Remove(itemUi);
+                    };
                     listView.Add(itemUi);
                 }
                 VisualElement plus = _prefabPlusElement.Instantiate();
