@@ -11,6 +11,7 @@ using UIStateControllers;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UIElements;
+using UnityEngine.XR;
 using Zenject;
 
 public class UIController 
@@ -25,6 +26,7 @@ public class UIController
     public (Game game, bool isEdit) ActualGame { get; set; }
     public Review ActualReview { get; set; }
     public (string message, IState previousState) ErrorInfo { get; private set; }
+    public (string message, IState previousState, Action yesFunction) CorrectInfo { get; private set; }
     private Dictionary<Type, IUIState> _statesControllers;
 
     [Inject]
@@ -57,6 +59,7 @@ public class UIController
             {typeof(GamesCharacterInputState), new GamesCharacterInputUIStateController(this) },
             {typeof(ImportInputState), new ImportInputStateControllers(this, _gameDataFactory) },
             {typeof(ErrorScreenState), new ErrorUIStateController(this) },
+            {typeof(CorrectScreenState), new CorrectUIStateController(this) },
         };
     }
     public void SetActualData(GameData gameData) => _actualData = gameData;
@@ -171,6 +174,7 @@ public class UIController
     }
 
     public void SetErrorData(string message) => ErrorInfo = (message, StateMachine.ActualState);
+    public void SetCorrectData(string message, Action yesAction) => CorrectInfo = (message, StateMachine.ActualState, yesAction);
     public void SetInputFieldColor(VisualElement textField, Color color, int boardSize)
     {
         textField.style.borderBottomColor = color;

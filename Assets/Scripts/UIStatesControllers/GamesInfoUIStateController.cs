@@ -37,15 +37,20 @@ namespace UIStateControllers
                 for (int i = 0; i < games.Count(); i++)
                 {
                     VisualElement itemUi = _prefabGamesElement.Instantiate();
-                    itemUi.Q<Label>("Number").text = i.ToString();
+                    itemUi.Q<Label>("Number").text = (i + 1).ToString();
                     itemUi.Q<Label>("Players").text = games[i].Players.ToString();
                     itemUi.Q<Label>("Time").text = games[i].Time.ToString("F1") + " min";
                     itemUi.Q<Label>("Text").text = games[i].Comment;
                     int save = i;
                     itemUi.Q<Button>("DeleteButton").clicked += () =>
                     {
-                        ActualData.RemoveGame(games[save]);
-                        listView.Remove(itemUi);
+                        _uIController.SetCorrectData($"Are you sure you want to delete the game with index \"{save + 1}\"?",
+                           () =>
+                           {
+                               ActualData.RemoveGame(games[save]);
+                               listView.Remove(itemUi);
+                           });
+                        StateMachine.SetCorrectState();
                     };
                     itemUi.Q<Button>("EditButton").clicked += () =>
                     {

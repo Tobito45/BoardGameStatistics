@@ -36,8 +36,13 @@ namespace UIStateControllers
                     itemUi.Q<Label>("Mark").text = review.Mark.ToString("F1");
                     itemUi.Q<Button>("DeleteButton").clicked += () =>
                     {
-                        ActualData.RemoveReview(review);
-                        listView.Remove(itemUi);
+                        _uIController.SetCorrectData($"Are you sure you want to delete the review of \"{review.Name}\"?",
+                          () =>
+                          {
+                              ActualData.RemoveReview(review);
+                              listView.Remove(itemUi);
+                          });
+                        StateMachine.SetCorrectState();
                     };
                     itemUi.Q<Button>("EditButton").clicked += () =>
                     {

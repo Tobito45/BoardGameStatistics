@@ -156,5 +156,9 @@ namespace States
     {
         public ErrorScreenState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController) { }
     }
+    public class CorrectScreenState : BaseState, IState
+    {
+        public CorrectScreenState(VisualElement visualElement, UIController uIController) : base(visualElement, uIController) { }
+    }
 }
 

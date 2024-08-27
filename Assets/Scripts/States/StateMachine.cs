@@ -26,7 +26,8 @@ namespace States
         private readonly GamesCharacterInputState _gamesCharacterInputState;
         private readonly ImportInputState _importInputState;
         private readonly ErrorScreenState _errorScreenState;
-        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState, GameNewInputState gameNewInputState, StartScreenState startScreenState, UrlInputState urlInput, GamesCharacterInputState gamesCharacterInputState, ImportInputState importInputState, ErrorScreenState errorScreenState)
+        private readonly CorrectScreenState _correctScreenState;
+        public StateMachine(MainState mainState, GameState gameState, ActionsState actionsState, ReviewsState reviewsState, ReviewInputState reviewsInputState, GamesInfoState gamesInfoState, GamesInfoInputState gamesInfoInputState, CharactersState charactersState, CharacterNewInputState charactersNewInputState, CharacterChangeInputState charactersChangeInputState, GameNewInputState gameNewInputState, StartScreenState startScreenState, UrlInputState urlInput, GamesCharacterInputState gamesCharacterInputState, ImportInputState importInputState, ErrorScreenState errorScreenState, CorrectScreenState correctScreenState)
         {
             _mainState = mainState;
             _gameState = gameState;
@@ -44,6 +45,7 @@ namespace States
             _gamesCharacterInputState = gamesCharacterInputState;
             _importInputState = importInputState;
             _errorScreenState = errorScreenState;
+            _correctScreenState = correctScreenState;
 
             Intialize(_mainState);
         }
@@ -76,5 +78,6 @@ namespace States
         public void SetGamesCharacterInputState() => TransitionTo(_gamesCharacterInputState);
         public void SetImportInputState() => TransitionTo(_importInputState);
         public void SetErrorState() => TransitionTo(_errorScreenState);
+        public void SetCorrectState() => TransitionTo(_correctScreenState);
     }
 }

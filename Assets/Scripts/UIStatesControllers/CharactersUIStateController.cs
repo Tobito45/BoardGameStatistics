@@ -51,8 +51,13 @@ namespace UIStateControllers
                     };
                     itemUi.Q<Button>("DeleteButton").clicked += () =>
                     {
-                        ActualData.RemoveCharacter(character);
-                        listView.Remove(itemUi);
+                        _uIController.SetCorrectData($"Are you sure you want to delete the character \"{character.Name}\"?",
+                            () =>
+                            {
+                                ActualData.RemoveCharacter(character);
+                                listView.Remove(itemUi);
+                            });
+                        StateMachine.SetCorrectState();
                     };
                     listView.Add(itemUi);
                 }
