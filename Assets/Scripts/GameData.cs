@@ -14,9 +14,9 @@ namespace Data
         private List<Character> _characters = new List<Character>();
         private List<string> _urls = new List<string>();
         public int Index {get; private set; }
-        public string Name { get; private set; }
-        public string Url { get; private set; }
-        public string Description { get; private set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public string Description { get; set; }
         public float Players => _games.Count == 0 ? -1 : (float)_games.Sum(n => n.Players) / _games.Count;
 
         public int Games => _games.Count;

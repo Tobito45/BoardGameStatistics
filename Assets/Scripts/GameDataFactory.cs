@@ -67,6 +67,7 @@ public class GameDataFactory
     }
 
     public void AddBoardGame(GameData gameData) => data.Add(gameData);
+    public void RemoveBoardGame(GameData gameData) => data.Remove(gameData);
 
     private void CreateUrls()
     {

@@ -37,6 +37,20 @@ namespace UIStateControllers
                 itemUi.Q<Label>("Name").text = data.Name;
                 itemUi.Q<Label>("MarkText").text = data.Mark == -1 ? "-" : data.Mark.ToString("F1"); ;
                 itemUi.Q<Label>("GamesText").text = data.Games.ToString();
+                itemUi.Q<Button>("EditButton").clicked += () =>
+                {
+                    _uIController.SetActualData(data);
+                    StateMachine.SetGameNewInputState();
+                };
+                itemUi.Q<Button>("DeleteButton").clicked += () =>
+                {
+                    _uIController.SetCorrectData($"Are you sure you want to delete the board game \"{data.Name}\"?",
+                      () =>
+                      {
+                          _gameDataFactory.RemoveBoardGame(data);
+                      });
+                    StateMachine.SetCorrectState();
+                };
                 itemUi.Q<Button>("MoreButton").clicked += () =>
                 {
                     _uIController.SetActualData(data);

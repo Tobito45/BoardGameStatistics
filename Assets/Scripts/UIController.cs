@@ -25,6 +25,8 @@ public class UIController
     public  List<GameData> ImportedData { get; set; } //dangeres
     public (Game game, bool isEdit) ActualGame { get; set; }
     public Review ActualReview { get; set; }
+    public void SetActualData(GameData gameData) => _actualData = gameData;
+    public GameData GetActualData => _actualData;
     public (string message, IState previousState) ErrorInfo { get; private set; }
     public (string message, IState previousState, Action yesFunction) CorrectInfo { get; private set; }
     private Dictionary<Type, IUIState> _statesControllers;
@@ -62,8 +64,7 @@ public class UIController
             {typeof(CorrectScreenState), new CorrectUIStateController(this) },
         };
     }
-    public void SetActualData(GameData gameData) => _actualData = gameData;
-    public GameData GetActualData => _actualData;
+    
     public IUIState GetController(BaseState state)
     {
         return _statesControllers[state.GetType()];

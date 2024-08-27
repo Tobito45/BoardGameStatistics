@@ -16,8 +16,16 @@ namespace UIStateControllers
 
         public override void Installization(VisualElement visualElement)
         {
-            visualElement.Q<Button>("BackButton").clicked += () => StateMachine.SetMainState();
-            visualElement.Q<Button>("AddButton").clicked += () => SaveNewGame(visualElement);
+            visualElement.Q<Button>("BackButton").clicked += () =>
+            {
+                _uIController.SetActualData(null);
+                StateMachine.SetMainState();
+            };
+            visualElement.Q<Button>("AddButton").clicked += () =>
+            {
+                SaveNewGame(visualElement);
+                _uIController.SetActualData(null);
+            };
         }
         public override void Clear(VisualElement visualElement) { }
 
@@ -26,9 +34,17 @@ namespace UIStateControllers
             TextField textFieldName = visualElement.Q<TextField>("NameInput");
             TextField textFieldUrl = visualElement.Q<TextField>("UrlInput");
             TextField textFieldText = visualElement.Q<TextField>("TextInput");
-            textFieldName.value = string.Empty;
-            textFieldUrl.value = string.Empty;
-            textFieldText.value = string.Empty;
+            if(ActualData == null)
+            {
+                textFieldName.value = string.Empty;
+                textFieldUrl.value = string.Empty;
+                textFieldText.value = string.Empty;
+            } else
+            {
+                textFieldName.value = ActualData.Name;
+                textFieldUrl.value = ActualData.Url;
+                textFieldText.value = ActualData.Description;
+            }
             _uIController.SetInputFieldColor(textFieldName, Color.white, 0);
             _uIController.SetInputFieldColor(textFieldUrl, Color.white, 0);
             _uIController.SetInputFieldColor(textFieldText, Color.white, 0);
@@ -64,9 +80,19 @@ namespace UIStateControllers
             if (!Validate(textFieldName, textFieldUrl, textFieldName))
                 return;
 
-            GameData gameData = new GameData(textFieldName.value, textFieldUrl.value, textFieldText.value);
-            gameData.AddUrl(GameDataFactory.URL_LOADING);
-            _gameDataFactory.AddBoardGame(gameData);
+
+            if (ActualData == null)
+            {
+                GameData gameData = new GameData(textFieldName.value, textFieldUrl.value, textFieldText.value);
+                gameData.AddUrl(GameDataFactory.URL_LOADING);
+                _gameDataFactory.AddBoardGame(gameData);
+            } else
+            {
+                ActualData.Name = textFieldName.value;
+                ActualData.Url = textFieldUrl.value;
+                ActualData.Description = textFieldText.value;
+            }
+
             StateMachine.SetMainState();
         }
     }

@@ -21,6 +21,7 @@ namespace UIStateControllers
 
         public override void Update(VisualElement visualElement)
         {
+            _uIController.ErrorInfo.previousState.Entry();
             visualElement.Q<Label>("Text").text = _uIController.ErrorInfo.message;
         }
 
