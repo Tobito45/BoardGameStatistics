@@ -44,7 +44,9 @@ namespace UIStateControllers
             TextField textField = itemUi.Q<TextField>("NameInput");
             textField.value = str;
             textField.RegisterCallback<ChangeEvent<string>>(evt => _uIController.LoadImage(itemUi.Q<VisualElement>("Image"), evt.newValue));
-            _uIController.LoadImage(itemUi.Q<VisualElement>("Image"), str);
+            
+            if(str != string.Empty)
+                _uIController.LoadImage(itemUi.Q<VisualElement>("Image"), str);
 
             itemUi.Q<Button>("DeleteButton").clicked += () =>
             {

@@ -32,16 +32,19 @@ namespace UIStateControllers
         {
             TextField textFieldName = visualElement.Q<TextField>("NameInput");
             TextField textFieldText = visualElement.Q<TextField>("TextInput");
-            if(_uIController.ActualReview != null)
-            {
-                textFieldName.value = _uIController.ActualReview.Name;
-                textFieldText.value = _uIController.ActualReview.Text;
-                visualElement.Q<FloatField>("MarkInput").value = _uIController.ActualReview.Mark;
-            } else
+            if (_uIController.ActualReview == null)
             {
                 textFieldName.value = string.Empty;
                 textFieldText.value = string.Empty;
                 visualElement.Q<FloatField>("MarkInput").value = 0.0f;
+                visualElement.Q<Label>("HeadText").text = "New review";
+            }
+            else
+            {
+                textFieldName.value = _uIController.ActualReview.Name;
+                textFieldText.value = _uIController.ActualReview.Text;
+                visualElement.Q<FloatField>("MarkInput").value = _uIController.ActualReview.Mark;
+                visualElement.Q<Label>("HeadText").text = "Edit review";
             }
 
             _uIController.SetInputFieldColor(textFieldText, Color.white, 0);

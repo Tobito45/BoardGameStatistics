@@ -1,6 +1,4 @@
 using Data;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,11 +24,14 @@ namespace UIStateControllers
                 textFieldGames.value = 0;
                 textFieldWins.value = 0;
                 textFieldName.value = string.Empty;
-            } else
+                visualElement.Q<Label>("HeadText").text = "New character";
+            }
+            else
             {
                 textFieldGames.value = (uint)_uIController.ActualCharater.Games;
                 textFieldWins.value = (uint)_uIController.ActualCharater.Wins;
                 textFieldName.value = _uIController.ActualCharater.Name;
+                visualElement.Q<Label>("HeadText").text = "Edit character";
             }
             _uIController.SetInputFieldColor(textFieldGames, Color.white, 0);
             _uIController.SetInputFieldColor(textFieldWins, Color.white, 0);

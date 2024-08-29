@@ -46,12 +46,14 @@ namespace UIStateControllers
                 _uIController.ActualGame = (new Game(), false);
                 textFieldPlayers.value = textFieldTime.value = 0;
                 visualElement.Q<TextField>("TextInput").value = string.Empty;
+                visualElement.Q<Label>("HeadText").text = "Add game";
             }
             else
             {
                 textFieldPlayers.value = (uint)_uIController.ActualGame.game.Players;
                 textFieldTime.value = (uint)_uIController.ActualGame.game.Time;
                 visualElement.Q<TextField>("TextInput").value = _uIController.ActualGame.game.Comment;
+                visualElement.Q<Label>("HeadText").text = "Edit game";
             }
 
             _uIController.SetInputFieldColor(textFieldPlayers, Color.white, 0);

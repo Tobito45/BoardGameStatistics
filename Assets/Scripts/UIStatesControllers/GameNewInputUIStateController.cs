@@ -39,11 +39,13 @@ namespace UIStateControllers
                 textFieldName.value = string.Empty;
                 textFieldUrl.value = string.Empty;
                 textFieldText.value = string.Empty;
+                visualElement.Q<Label>("HeadText").text = "New board game";
             } else
             {
                 textFieldName.value = ActualData.Name;
                 textFieldUrl.value = ActualData.Url;
                 textFieldText.value = ActualData.Description;
+                visualElement.Q<Label>("HeadText").text = "Edit board game";
             }
             _uIController.SetInputFieldColor(textFieldName, Color.white, 0);
             _uIController.SetInputFieldColor(textFieldUrl, Color.white, 0);
