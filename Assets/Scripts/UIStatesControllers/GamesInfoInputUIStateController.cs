@@ -26,11 +26,13 @@ namespace UIStateControllers
             };
             visualElement.Q<Button>("AddButtonWinners").clicked += () =>
             {
+                SaveData(visualElement);
                 StateMachine.SetGamesCharacterInputState();
                 _uIController.ActualGame.game.isLoser = false;
             };
             visualElement.Q<Button>("AddButtonLossers").clicked += () =>
             {
+                SaveData(visualElement);
                 StateMachine.SetGamesCharacterInputState();
                 _uIController.ActualGame.game.isLoser = true;
             };
@@ -53,7 +55,8 @@ namespace UIStateControllers
                 textFieldPlayers.value = (uint)_uIController.ActualGame.game.Players;
                 textFieldTime.value = (uint)_uIController.ActualGame.game.Time;
                 visualElement.Q<TextField>("TextInput").value = _uIController.ActualGame.game.Comment;
-                visualElement.Q<Label>("HeadText").text = "Edit game";
+                if(_uIController.ActualGame.isEdit)
+                    visualElement.Q<Label>("HeadText").text = "Edit game";
             }
 
             _uIController.SetInputFieldColor(textFieldPlayers, Color.white, 0);
@@ -98,6 +101,15 @@ namespace UIStateControllers
             return result;
         }
 
+        private void SaveData(VisualElement visualElement)
+        {
+            UnsignedIntegerField textFieldPlayers = visualElement.Q<UnsignedIntegerField>("PlayersInput");
+            UnsignedIntegerField textFieldTime = visualElement.Q<UnsignedIntegerField>("TimeInput");
+            _uIController.ActualGame.game.Time = (int)textFieldTime.value;
+            _uIController.ActualGame.game.Players = (int)textFieldPlayers.value;
+            _uIController.ActualGame.game.Comment = visualElement.Q<TextField>("TextInput").value;
+        }
+
         private void SaveNewGame(VisualElement visualElement)
         {
             UnsignedIntegerField textFieldPlayers = visualElement.Q<UnsignedIntegerField>("PlayersInput");
@@ -106,9 +118,7 @@ namespace UIStateControllers
             if (!Validate(textFieldPlayers, textFieldTime))
                 return;
 
-            _uIController.ActualGame.game.Time = (int)textFieldTime.value;
-            _uIController.ActualGame.game.Players = (int)textFieldPlayers.value;
-            _uIController.ActualGame.game.Comment = visualElement.Q<TextField>("TextInput").value;
+            SaveData(visualElement);
             if(!_uIController.ActualGame.isEdit)
                 _uIController.GetActualData.AddGame(_uIController.ActualGame.game);
             StateMachine.SetGamesInfoState();

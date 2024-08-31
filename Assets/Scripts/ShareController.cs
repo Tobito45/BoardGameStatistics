@@ -16,7 +16,7 @@ public class ShareController : MonoBehaviour
 
     private void Start()
     {
-        GettingFile();       
+     //   GettingFile();       
     }
 
     void GettingFile()

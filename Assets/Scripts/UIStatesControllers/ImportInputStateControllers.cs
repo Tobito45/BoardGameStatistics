@@ -54,9 +54,12 @@ namespace UIStateControllers
                 bool urls = item.Q<Toggle>("UrlToggle").value;
                
                 GameData importData = _uIController.ImportedData.First(x => x.Name.Equals(name));
-                GameData actualData = _gameDataFactory.GetData().FirstOrDefault(x => x.Name.Equals(name));
+                GameData actualData = _gameDataFactory.GetData().FirstOrDefault(x => {
+                    return x.Name.Trim() == name.Trim();
+                    });
                 if (!onlyGame && !reviews && !games && !charaters && !urls) continue;
 
+                Debug.Log(actualData + " " + _gameDataFactory.GetData().Count());
                 if (actualData == null) {
                     actualData = new GameData(name, importData.Url, importData.Description);
                     _gameDataFactory.AddBoardGame(actualData);
