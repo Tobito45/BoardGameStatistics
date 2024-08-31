@@ -6,12 +6,12 @@ Unity version: 2022.3.7f1
 
 ## User documentation
 
-See [User documentation Readme](./Assets/Docs/UserDocumentation.md)
+See [User documentation Readme](./Documentation/UserDocumentation.md)
 
 ## Programmer documentation
 
-See [Programmer documentation Readme](./Assets/Docs/ProgrammerDocumentation.md)
+See [Programmer documentation Readme](./Documentation/ProgrammerDocumentation.md)
 
 ## Installation
 
-See [Installation Readme](./Assets/Docs/Installation.md)
+See [Installation Readme](./Documentation/Installation.md)
