@@ -8,4 +8,4 @@ In other cases, when you exit/stop the application, the data will be saved and w
 
 ## Main menu
 
-![Android Build Error](./Media/AndroidBuildError.PNG)
+![Main menu](./Documentation/Media/Main_menu.JPG)
