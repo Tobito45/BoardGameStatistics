@@ -90,7 +90,7 @@ Key elements:
 - Grade input field
 - Comment input field
 - "Save" button - save changes and go back.
-= "Back" button - returns to the previous menu and all changes are lost.
+- "Back" button - returns to the previous menu and all changes are lost.
 
 ## Games menu
 
@@ -112,4 +112,65 @@ Other buttons:
 
 ## Games form menu
 
+The menu of the form for adding/editing information about games played works on the same principle as other forms, but in this form there is also a possibility to add losers and winners of this game with their number of points.
+
 ![Edit game menu](./Media/Edit_game.jpg)
+
+Other buttons:
+- Plus button - adds a character to a specific list once selected.
+
+## Select character to game menu
+
+In the character selection menu to add a character to the game, you have to choose a character from the list and write the number of points (can be 0)
+
+![Add character to game menu](./Media/Add_character.jpg)
+
+Key elements:
+- Number of points
+- A list in which to choose a character
+- "Save" button - add character and go back.
+- "Back" button - returns to the previous menu without adding.
+
+## Character menu
+
+In the character menu, you can see the characters that can receive points in the game. Each item has statistics about the characters.
+
+![Character menu](./Media/Character_menu.jpg)
+
+Character element:
+- Character name
+- Number of games
+- Number of wins
+- Average number of winning points
+- Win percentage
+- Delete Character
+- Edit Character
+
+Other buttons:
+- Plus button - add a new сharacter, after filling out the form
+
+## Import menu
+
+The import menu is activated when the import file is loaded correctly. In this menu you can import new data about characters, games and heroes into existing games. If the game does not exist, it will be created.
+
+![Import menu](./Media/Import_menu.jpg)
+
+Import element:
+- Game name
+- Toggle to import reviews
+- Toggle to import games
+- Toggle to import characters
+- Toggle to import url images
+- Toggle to import only the game, without internal data
+
+Other buttons:
+- "Save" button - adding data on selected conditions
+- "Back" button - returns to the previous menu without adding.
+
+## Error menu and confirmation menu
+
+Confirmation menu occurs when deleting any difficult to return items such as games, reviews, characters, etc. After pressing confirm, the action ends.
+The error menu appears when an error is received while the application is running.
+
+![Confirmation menu](./Media/Confirmation_menu.jpg)
+![Error menu](./Media/Error_menu.jpg)
