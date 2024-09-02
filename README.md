@@ -15,3 +15,7 @@ See [Programmer documentation](./Documentation/ProgrammerDocumentation.md)
 ## Installation
 
 See [Installation](./Documentation/Installation.md)
+
+## Change Log
+
+See [Change Log](./Documentation/ChangeLog.md)
