@@ -40,3 +40,26 @@ Classes:
 ### Package UIStateControllers
 
 A package that implements the change and control side of the interface. Class instances are created in a UIController object and stored in a dictionary. These states have key methods Installization, Update (triggered each time the state is run), Clear (used to clear the memory).
+
+Classes:
+- IUIState - interface for each state controller with Installization, Update and Clear methods.
+- UIStateControllerBase - is an abstract class which is a father class for all state controllers, it stores references to UIController. Implements the IUIState interface.
+- MainUIStateController - is responsible for interface controls for MainState. Inherits UIStateControllerBase.
+- GameUIStateController - is responsible for interface controls for GameState. Inherits UIStateControllerBase.
+- ActionsStateController - is responsible for interface controls for ActionsState. Inherits UIStateControllerBase.
+- _OtherStateControllers - is responsible for interface controls for OthersState. Inherits UIStateControllerBase._
+
+### Other classes
+
+- SceneInstaller - application entry point, bootstrap, creates all objects and defines dependencies. Inherits MonoInstaller, uses Zenject library.
+- MigrationController - responsible for methods that refine GameData in case of changes due to new versions of the application. It is done step by step for each version. It is a static class.
+- ShareController - implements the use of the Native Gallery for Android and Native Share for Android libraries for importing and exporting. It is a static class.
+- UIController - is a linking class in the application. It performs various actions that can be repeated in the state control classes. It also stores information to be transferred between states. It has Dictionary<Type, IUIState>().
+
+### Solving specific problems
+
+#### Start menu problem
+
+A start menu has been added to the application to solve one of the problems caused by the too fast creation of objects using Zenjects that work with VisualElement. Some objects such as the UIStateControllerBase class implementers search for objects using the Q<>() method and can't find anything because VisualElement hasn't had time to create all its children yet.
+To solve this problem we implemented a timer via IEnumerator for 0.2 seconds and after that all objects are created and dependencies are described.
+
