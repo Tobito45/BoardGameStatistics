@@ -31,12 +31,6 @@ namespace Data
             Description = description;
             Index = 0;
         }
-        public void DebugInfo()
-        {
-            Debug.Log(_urls.Count);
-            Debug.Log(_reviews.Count);
-            Debug.Log(Mark);
-        }
         public void AddReview(params Review[] reviews) => _reviews.AddRange(reviews);
         public void AddGame(params Game[] games) => _games.AddRange(games);
         public void AddCharacter(params Character[] characters) => _characters.AddRange(characters);

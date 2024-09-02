@@ -48,7 +48,6 @@ namespace UIStateControllers
                            () =>
                            {
                                ActualData.RemoveGame(games[save]);
-                               listView.Remove(itemUi);
                            });
                         StateMachine.SetCorrectState();
                     };

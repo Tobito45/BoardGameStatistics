@@ -4,9 +4,9 @@ using NativeFilePickerNamespace;
 using System;
 using Zenject;
 
-public class ShareController : MonoBehaviour
+public static class ShareController
 {
-    private UIController _uiController;
+  /*  private UIController _uiController;
 
     [Inject]
     public void Contruct(UIController uIController)
@@ -51,7 +51,7 @@ public class ShareController : MonoBehaviour
     string GetPathFromUri(AndroidJavaObject uri)
     {
         return uri.Call<string>("getPath");
-    }
+    }*/
 
     public static void ExportData(string fileName)
     {

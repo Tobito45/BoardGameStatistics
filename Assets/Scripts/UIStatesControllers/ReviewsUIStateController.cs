@@ -40,7 +40,6 @@ namespace UIStateControllers
                           () =>
                           {
                               ActualData.RemoveReview(review);
-                              listView.Remove(itemUi);
                           });
                         StateMachine.SetCorrectState();
                     };

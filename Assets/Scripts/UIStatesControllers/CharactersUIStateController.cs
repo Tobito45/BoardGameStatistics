@@ -55,7 +55,6 @@ namespace UIStateControllers
                             () =>
                             {
                                 ActualData.RemoveCharacter(character);
-                                listView.Remove(itemUi);
                             });
                         StateMachine.SetCorrectState();
                     };
