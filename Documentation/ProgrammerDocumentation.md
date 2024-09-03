@@ -63,3 +63,8 @@ Classes:
 A start menu has been added to the application to solve one of the problems caused by the too fast creation of objects using Zenjects that work with VisualElement. Some objects such as the UIStateControllerBase class implementers search for objects using the Q<>() method and can't find anything because VisualElement hasn't had time to create all its children yet.
 To solve this problem we implemented a timer via IEnumerator for 0.2 seconds and after that all objects are created and dependencies are described.
 
+#### Loading pictures
+
+There are two kinds of images in the application, those that need to be loaded by URL and those that need to be loaded by path. The problem is that it is necessary to determine whether this is a link to a URL or a path to a picture from local storage.
+The problem is solved so that when executing the LoadImage method, which takes in VisualElement and path, and this method already inside solves using the string function StartsWith(‘http://’) and StartsWith(‘https://’). In case of truth the image is loaded from the Internet, in other cases from local storage. 
+_Maybe it is better to use Regex._
