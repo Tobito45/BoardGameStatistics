@@ -18,7 +18,7 @@ public class UIController
 {
     private GameDataFactory _gameDataFactory;
     private GameData _actualData;
-    private Texture2D _loadingSprite, _errorSprite;
+    private Texture2D _loadingSprite, _errorSprite, _plusSprite;
 
     public StateMachine StateMachine { get; private set; }
     public  Character ActualCharater { get; set; }
@@ -42,6 +42,7 @@ public class UIController
         _gameDataFactory = gameDataFactory;
         _loadingSprite = Resources.Load<Texture2D>("Pictures/loading");
         _errorSprite = Resources.Load<Texture2D>("Pictures/error");
+        _plusSprite = Resources.Load<Texture2D>("Pictures/plus_icon");
 
         _statesControllers = new Dictionary<Type, IUIState>()
         {
@@ -132,6 +133,13 @@ public class UIController
 
     public void LoadImage(VisualElement image, string path)
     {
+        if (path == GameDataFactory.URL_LOADING)
+        {
+            image.style.backgroundImage = _plusSprite;
+            Debug.Log(_plusSprite.name);
+            return;
+        }
+
         if  (IsLink(path))//(Regex.IsMatch(path, urlPattern)) 
             LoadImageAsync(image, path);
         else
